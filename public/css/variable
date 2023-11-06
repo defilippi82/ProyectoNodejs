@@ -1,0 +1,40 @@
+:root{
+    --pastel-green-50: #f1fcf1;
+    --pastel-green-100: #dff9e2;
+    --pastel-green-200: #c0f2c5;
+    --pastel-green-300: #78e285;
+    --pastel-green-400: #56d265;
+    --pastel-green-500: #2fb840;
+    --pastel-green-600: #219831;
+    --pastel-green-700: #1d7829;
+    --pastel-green-800: #1c5f25;
+    --pastel-green-900: #194e21;
+    --pastel-green-950: #082b0f;
+    
+    --cornflower-blue-50: #f1f6fd;
+--cornflower-blue-100: #e0eaf9;
+--cornflower-blue-200: #c9dbf4;
+--cornflower-blue-300: #a4c4ec;
+--cornflower-blue-400: #78a5e2;
+--cornflower-blue-500: #5886d9;
+--cornflower-blue-600: #446ccc;
+--cornflower-blue-700: #3a59bb;
+--cornflower-blue-800: #354a98;
+--cornflower-blue-900: #2f4079;
+--cornflower-blue-950: #21294a;
+
+
+--harvest-gold-50: #fcf9f0;
+--harvest-gold-100: #f8f0dc;
+--harvest-gold-200: #f0ddb8;
+--harvest-gold-300: #e2bc78;
+--harvest-gold-400: #dba65c;
+--harvest-gold-500: #d38e3c;
+--harvest-gold-600: #c57731;
+--harvest-gold-700: #a45e2a;
+--harvest-gold-800: #834b29;
+--harvest-gold-900: #6a3f24;
+--harvest-gold-950: #391f11;
+
+
+}

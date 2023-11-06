@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs'); %>
+    <link rel="stylesheet" href="/node_modules/fullcalendar/main.css">
+    <script src="/node_modules/fullcalendar/main.js"></script>
+
+</head>
+<body class="container">
+
+<header>
+    <%- include('partials/header'); %>
+</header><br><br>
+
+<main class="container-fluid">
+    
+    <div id="calendar"></div>
+    <form id="reservaForm" action="/reserva" method="POST">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+    
+        <label for="hora">Hora de Inicio:</label>
+        <!--<input type="time" id="hora" name="hora" required>-->
+        <select type="time" id="hora" name="hora" required>
+            <option value="" disabled selected>Selecciona una hora</option>
+            <option value="08:00">08:00 AM</option>
+            <option value="08:30">08:30 AM</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="09:30">09:30 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="10:30">10:30 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="11:30">11:30 AM</option>
+            <option value="12:00">12:00 PM</option>
+            <option value="12:30">12:30 PM</option>
+            <option value="13:00">01:00 PM</option>
+            <option value="13:30">01:30 PM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="14:30">02:30 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="15:30">03:30 PM</option>
+            <option value="16:00">04:00 PM</option>
+            <option value="16:30">04:30 PM</option>
+            <option value="17:00">05:00 PM</option>
+            <option value="17:30">05:30 PM</option>
+            <option value="18:00">06:00 PM</option>
+            <option value="18:30">06:30 PM</option>
+            <option value="19:00">07:00 PM</option>
+            <option value="19:30">07:30 PM</option>
+            <option value="20:00">08:00 PM</option>
+            <option value="20:30">08:30 PM</option>
+            <option value="21:00">09:00 PM</option>
+            <option value="21:30">09:30 PM</option>
+            <option value="22:00">10:00 PM</option>
+            <option value="22:30">10:30 PM</option>
+            <option value="23:00">11:00 PM</option>
+            <!-- Agrega más opciones de hora cada 30 minutos -->
+          </select>
+    
+        <label for="cancha">Canchas:</label>
+        <select id="cancha" name="cancha"  required>
+            <option value="1">Tenis 1</option>
+            <option value="2">Tenis 2</option>
+            <option value="3">Fútbol</option>
+        </select><br>
+        
+        <input type="hidden" name="userId" value="<%= userId %>">
+
+
+        <label for="username">Socio:</label>
+        <p><%= name %> </p>
+    
+        <button type="button" class="btn btn-dark"">Reservar</button>
+    </form>
+    <!-- Aquí puedes mostrar mensajes al usuario -->
+    <div id="mensaje">
+        <h6>Recuerde que se puede reservar de 1 hora por vez por socio</h6><div class="float-right">
+            <h6>Se cobrará la ficha de luz despues de las 20hs.</h6>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <% if(typeof alert != "undefined"){ %>
+        <script>
+            Swal.fire({
+                title:'<%= alertTitle %>',
+                text:'<%= alertMessage %>',
+                icon:'<%= alertIcon %>',
+                showConfirmButton: <%=showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(()=>{
+                window.location = '/<%= ruta %>'
+            })
+            </script>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+		<script src="resources/js/botonpanico.js"></script>
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+	
+</body>
+</html>
