@@ -109,7 +109,21 @@ app.get('/partials/header', (req, res) => {
         });
     }
 });
-
+// Ruta para mostrar la temperatura en la navbar
+/*app.get('/', async (req, res) => {
+    try {
+      const url = 'https://ws.smn.gob.ar/map_items/weather';
+      const response = await axios.get(url);
+      const weatherData = response.data;
+  
+      // Extraer la temperatura actual de los datos
+      const temperature = weatherData.current.temperature;
+  
+      res.render('index', { temperature });
+    } catch (error) {
+      res.status(500).send('Error al obtener los datos meteorológicos.');
+    }
+  });*/
 
 //10 - Método para la REGISTRACIÓN
 app.post('/register', async (req, res) => {
