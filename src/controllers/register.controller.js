@@ -1,3 +1,4 @@
+
 const registerController ={
 async registerPost(req, res) {
     let nombre = req.body.nombre;

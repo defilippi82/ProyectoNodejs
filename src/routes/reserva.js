@@ -7,8 +7,6 @@ const {
 
 router.get('/', reservaGet);
 
-//POST
-
 // Ruta para manejar la solicitud de reserva
 router.post('/', reservaPost);
 

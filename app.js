@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
 
-//const FullCalendar = require('fullcalendar');
+const FullCalendar = require('fullcalendar');
 const dotenv = require('dotenv');
 
 dotenv.config({
