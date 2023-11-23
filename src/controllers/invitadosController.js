@@ -1,8 +1,8 @@
 
 
-console.log('invitadosController');
 module.exports.invitadosController = (req, res) => {
-
-    res.render('invitados');
   
-  };
+  res.render('invitados');
+  
+};
+console.log('invitadosController');
