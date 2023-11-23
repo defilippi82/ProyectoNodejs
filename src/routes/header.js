@@ -1,7 +1,7 @@
 const express= require('express');
 const router= express.Router();
 
-const logueado= require('./controllers/header');
+const logueado= require('../controllers/header');
 
 
 router.get('/', logueado);
