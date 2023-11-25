@@ -21,6 +21,7 @@ app.use(session({
 //2 -middlewares Para poder capturar los datos del formulario (sin urlencoded nos devuelve "undefined")
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(express.static('node_modules'));
 
 //-seteamos el directorio de estaticos
 //app.use(express.static('public'));
@@ -47,22 +48,26 @@ const conn = require('./src/database/conn');
 console.log(__dirname);
 
 const indexRouter = require('./src/routes/index');
-//const registerRouter = require('./src/routes/register.routes');
+const registerRouter = require('./src/routes/register.routes');
 const invitadosRouter = require('./src/routes/invitados');
-//const reservaRouter = require('./src/routes/reserva');
-//const loginRouter = require('./src/routes/login');
-//const contactoRouter = require('./src/routes/contacto');
-//const headerRouter = require('./src/routes/header');
+const reservaRouter = require('./src/routes/reserva');
+const loginRouter = require('./src/routes/login');
+const contactoRouter = require('./src/routes/contacto');
+const authRouter = require('./src/routes/login');
+
+
+//const mainRouter = require('./src/routes/mainRouter');
 
 //Usos de rutas
+//app.use('/', mainRouter);
 app.use('/index', indexRouter);
-//app.use('/register', registerRouter);
+app.use('/register', registerRouter);
 app.use('/invitados', invitadosRouter);
-/*app.use('/reserva', reservaRouter);
+app.use('/reserva', reservaRouter);
 app.use('/login', loginRouter);
-app.use('/', headerRouter);
+app.use('/auth', authRouter);
 app.use('/contacto', contactoRouter);
-*/
+
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {
     if (!req.user)

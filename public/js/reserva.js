@@ -1,4 +1,5 @@
 
+
 function reservaGet(req, res) {
     const login = req.session.loggedin || false;
     const name = req.session.nombre || 'Debe iniciar sesión';

@@ -1,5 +1,13 @@
+const bcryptjs = require('bcryptjs');
+const connection = require('../database/db');
+
+
 
 const registerController ={
+     registerGet(req, res) {
+        res.render('register');
+      },
+    
 async registerPost(req, res) {
     let nombre = req.body.nombre;
     let email = req.body.email;
@@ -53,4 +61,6 @@ async registerPost(req, res) {
         }
     })
 }
-}
+};
+
+module.exports = registerController;

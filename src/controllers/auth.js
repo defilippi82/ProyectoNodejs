@@ -1,7 +1,8 @@
 
-//POST
 //Metodo para la autenticacion
-function authPost(req, res) {
+
+module.exports.authPost = async (req, res) => {
+
     const user = req.body.user;
     const pass = req.body.pass;
     //let passwordHash= await bcryptjs.hash(pass, 8);

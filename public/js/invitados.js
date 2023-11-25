@@ -12,7 +12,7 @@ function invitadosGet(req, res) {
 function listaInvitado() {
     event.preventDefault();
 
-    const nombreapellido = "<%= session.nombre %>"; //document.getElementById('nombreapellido').value;
+    const nombreapellido = document.getElementById('nombreapellido').value;
     const dni = document.getElementById('dni').value;
     const patente = document.getElementById('patente').value;
 
@@ -27,7 +27,7 @@ function listaInvitado() {
     tbody.innerHTML += fila;
 
     const nombreapellidoInput = document.getElementById('nombreapellido');
-    document.getElementById('nombreapellido').value = "";
+    document.getElementById('nombreyapellido').value = "";
     document.getElementById('dni').value = "";
     document.getElementById('patente').value = "";
     nombreapellidoInput.focus();
@@ -126,7 +126,7 @@ function invitadosPost() {
 
 
 function invitar() {
-    var urlInvitacion = "/resources/pages/invitacion.html"; //pagina de la invitacion
+    var urlInvitacion = "public/pages/invitacion.html"; //pagina de la invitacion
     var msj = "Te envío la invitación para autorizar el ingreso " + urlInvitacion;
     var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msj);
 
