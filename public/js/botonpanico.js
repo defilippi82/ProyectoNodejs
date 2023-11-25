@@ -1,4 +1,5 @@
 // BOTONES DE PANICO
+
 function alerta() {
     if ("geolocation" in navigator) {
         function Location(latitud, longitud) {
@@ -37,7 +38,7 @@ function ruidos() {
             const manzana = "<%= manzana %>";
 
             const mensaje = "Soy del lote " + lote + " y escucho ruidos sospechosos por acá: " + latitud + ", " + longitud;
-            // var telefono = "+54911549394232"; // Reemplazar con el número de teléfono de los contactos de la isla
+             var telefono = "+54911549394232"; // Reemplazar con el número de teléfono de los contactos de la isla
             connection.query('SELECT telefono FROM usuarios WHERE manzana = ?', [manzana], (error, results) => {
                 if (error) {
                     console.log("Error al buscar contactos:", error);
@@ -91,6 +92,7 @@ function logueado(req, res) {
         });
     }
 };
+/*
 //POST
 //Metodo para la autenticacion
 function authPost(req, res) {
@@ -138,4 +140,4 @@ function authPost(req, res) {
         });
         res.end();
     }
-};
+};*/
