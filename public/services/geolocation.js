@@ -1,4 +1,4 @@
-// geolocation.js
+
 
 async function getCurrentPosition() {
     return new Promise((resolve, reject) => {

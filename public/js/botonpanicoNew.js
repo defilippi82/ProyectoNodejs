@@ -1,31 +1,47 @@
-function alerta() {
-    if ("geolocation" in navigator) {
-        function Location(latitud, longitud) {
-            this.latitud = latitud;
-            this.longitud = longitud;
-        }
+const geolocation = require('./services/geolocation');
+const contacts = require('./services/contacts'); 
+const whatsapp = require('./services/whatsapp');
+const lote = "<%= lote %>";
+const manzana = "<%= manzana %>";
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const latitud = position.coords.latitude;
-            const longitud = position.coords.longitude;
-            const lote = "<%= lote %>";
-            const manzana = "<%= manzana %>";
+async function alerta() {
+try{
+  const location = await geolocation.getCurrentPosition();  
+  const phoneNumbers = await contacts.getContacts(manzana);
+  
+  phoneNumbers.forEach(number => {
+    const message= buildAlertMessage(location)
+    whatsapp.sendMessage(number, message); 
+  });
 
-            const mensaje = "Soy del lote " + manzana + "-" + lote + ", escucho ruidos necesito que vengan acá, " + latitud + ", " + longitud;
-            const location = new Location(latitud, longitud);
-
-            // Obtener contactos de la misma manzana
-            obtenerContactosPorManzana(manzana, mensaje);
-
-        }, function (error) {
-            console.log("Error al obtener la ubicación:", error);
-        });
-    } else {
-        console.log("Geolocalización no es compatible con este navegador.");
-    }
+} catch (error) {
+    console.log(error);
+    
+  }
+  function buildAlertMessage(location) {
+    
+    const message = "Soy del lote " + manzana + "-" + lote + ", escucho ruidos necesito que vengan acá, " + location;
+            
+  return message; 
+}
 }
 
-function ruidos() {
+async function ruidos() {
+
+    try{
+        const location = await geolocation.getCurrentPosition();  
+        const phoneNumbers = await contacts.getContacts(manzana);
+        
+        phoneNumbers.forEach(number => {
+          const message= buildAlertMessage(location)
+          whatsapp.sendMessage(number, message); 
+        });
+      
+      } catch (error) {
+          console.log(error);
+          
+        }   
+    /*
     if (typeof navigator !== 'undefined' && navigator !== null && "geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var latitud = position.coords.latitude;
@@ -43,23 +59,38 @@ function ruidos() {
         });
     } else {
         console.log("Geolocalización no es compatible con este navegador.");
-    }
+    }*/
 }
+function emergencia() {
+    var telefono = "911";
+    var telefonoUrl = "tel:" + telefono;
+    window.open(telefonoUrl, '_self');
+};
 
-// Función para obtener contactos por manzana y enviar mensajes
-function obtenerContactosPorManzana(manzana, mensaje) {
-    connection.query('SELECT telefono FROM usuarios WHERE manzana = ?', [manzana], (error, results) => {
-        if (error) {
-            console.log("Error al buscar contactos:", error);
-        } else {
-            // Envía mensajes de WhatsApp a los contactos encontrados
-            results.forEach((contact) => {
-                const telefono = contact.telefono;
-                const whatsappUrl = "https://api.whatsapp.com/send?phone=" + telefono + "&text=" + encodeURIComponent(mensaje);
-                // Aquí puedes agregar lógica para enviar SMS
-                // Ejemplo: enviarSMS(telefono, mensaje);
-                window.open(whatsappUrl);
-            });
-        }
-    });
-}
+// FUNCIONES DEL HEADER
+function logueado(req, res) {
+    if (req.session.loggedin) {
+        const login = true;
+        const name = req.session.nombre;
+        const telefono = req.session.telefono;
+        const lote = req.session.lote;
+        const manzana = req.session.manzana;
+        const isla = req.session.isla;
+        const userId = req.session.id;
+        console.log(req.session);
+        res.render('partials/header', {
+            login,
+            name,
+            telefono,
+            lote,
+            manzana,
+            isla,
+            userId
+        });
+    } else {
+        res.render('partials/header', {
+            login: false,
+            name: 'Debe iniciar sesión'
+        });
+    }
+};

@@ -58,7 +58,7 @@ function invitacion() {
     document.getElementById('patente').value = "";
     documente.getElementById('mensaje').value = "";
     nombreapellidoInput.focus();
-
+    
 }
 //SE ENVIA EL CORREO A LA GUARDIA O LA LISTA DE INVITADOS
 function invitadosPost() {

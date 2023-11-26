@@ -6,4 +6,12 @@ const conn= mysql2.createConnection({
     password:process.env.DB_PASS,
     database:process.env.DB_DATABASE
 });
-module.exports= conn;
+conn.connect((error)=>{
+    if(error){
+        console.log('El error de conexión es ' +error);
+        return;
+    }
+        console.log('Conectado a la base de datos');
+    
+});
+module.exports=  {conn: pool.promise() };

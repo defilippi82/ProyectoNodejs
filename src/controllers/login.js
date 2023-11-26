@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
-const connection = require('../database/db');
+const conn = require('../database/conn');
+
 
 module.exports.loginPost =(req, res) => {
 

@@ -41,7 +41,7 @@ const bcryptjs = require("bcryptjs");
 //7- variables de session
 
 // 8 - Invocamos a la conexion de la DB
-const connection = require('./src/database/db');
+//const connection = require('./src/database/db');
 const conn = require('./src/database/conn');
 
 //9 - establecemos las rutas
@@ -92,6 +92,7 @@ function logueado(req, res) {
         const manzana = req.session.manzana;
         const isla = req.session.isla;
         const userId = req.session.id;
+        const rol = req.session.rol;
         console.log(req.session);
         res.render('partials/header', {
             login,
