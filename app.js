@@ -67,7 +67,7 @@ app.use('/reserva', reservaRouter);
 app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/contacto', contactoRouter);
-app.use('/admin', adminRouterRouter);
+app.use('/admin', adminRouter);
 
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {

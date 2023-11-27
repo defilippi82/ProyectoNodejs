@@ -16,7 +16,8 @@ function logueado(req, res) {
             lote,
             manzana,
             isla,
-            userId
+            userId,
+            rol
         });
     } else {
         res.render('partials/header', {

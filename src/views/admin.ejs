@@ -19,31 +19,46 @@
 
     <!-- Tab menu -->
     <div>
-      <button class="tab active" data-tab="users">Usuarios</button>
-      <button class="tab" data-tab="contacts">Contactos</button>
-      <button class="tab" data-tab="reservations">Reservas</button>
+      <button id="usuariosBotton" class="tab-content active" data-tab="users">Usuarios</button>
+      
+      <button id="reservasBotton" class="tab-content" data-tab="reservations">Reservas</button>
     </div>
 
     <!-- Contenido de tabs -->
-
+    <div id="contenidoUsuarios">
+      <!-- Aquí se mostrará la información de usuarios -->
+    </div>
+    <div id="contenidoReservas" style="display: none;">
+      <!-- Aquí se mostrará la información de reservas -->
+    </div>
     <div class="tab-content active" data-content="users">
       <!-- Table listing users -->
-      <table>
+      <table class="table table-dark table-striped">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Manzana</th>
+            <th>Lote</th>
+            <th>Isla</th>
+            <th>Teléfono</th>
             <th>Rol</th>
             <th>Acciones</th>
           </tr>  
         </thead>
 
-        <tbody>
-          <% users.forEach(user => { %>
+        <tbody id="tabla">
+          <% usuarios.forEach(user => { %>
             <tr>
-              <td><%= user.name %></td>
-              <td><%= user.email %></td> 
-              <td><%= user.role %></td>
+              <td><%= user.id %></td>
+              <td><%= user.nombre %></td>
+              <td><%= user.email %></td>
+              <td><%= user.manzana %></td>
+              <td><%= user.lote %></td>
+              <td><%= user.isla %></td>
+              <td><%= user.telefono %></td>
+              <td><%= user.rol %></td>
               <td>
                 <button class="btn btn-primary">Editar</button>
                 <button class="btn btn-primary">Eliminar</button>  
@@ -64,6 +79,7 @@
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="<KEY>"
         crossorigin="anonymous"></script>
       <script src="../controllers/admin.js"></script>
+      <script src="public/js/admin.js"></script>
     
   </main>
 

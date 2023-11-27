@@ -4,18 +4,9 @@ const router = express.Router()
 
 
 router.get('/', function(req, res) {
-    res.render('index'); 
-  });
-  /*
-const {
-    alerta,
-    ruidos,
-    emergencia
-}=require('../controllers/index');
-
-router.post('/alerta', alerta);
-router.post('/ruidos', ruidos);
-router.post('/emergencia', emergencia);
-*/
-
+  res.render('index', {
+    // Otras variables que necesites pasar a index.ejs
+    rol: req.session.rol // Pasando la variable rol a index.ejs
+})
+});
 module.exports = router;

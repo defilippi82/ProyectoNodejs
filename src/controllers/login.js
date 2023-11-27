@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const conn = require('../database/conn');
-
+const connection = require('../database/db');
 
 module.exports.loginPost =(req, res) => {
 
@@ -23,6 +23,7 @@ module.exports.loginPost =(req, res) => {
           req.session.loggedin = true;
           req.session.nombre = results[0].nombre;
           req.session.userId = results[0].id; // Configura userId en la sesión
+          req.session.rol = results[0].rol;
           res.render('login', {
             alert: true,
             alertTitle: "Conectado!",

@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
-const connection = require('../database/db');
-
+//const connection = require('../database/db');
+const conn = require('../database/conn');
 
 
 const registerController ={
