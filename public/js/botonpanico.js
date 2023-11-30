@@ -75,6 +75,7 @@ function logueado(req, res) {
         const manzana = req.session.manzana;
         const isla = req.session.isla;
         const userId = req.session.id;
+        const rol = req.session.rol;
         console.log(req.session);
         res.render('partials/header', {
             login,
@@ -83,7 +84,8 @@ function logueado(req, res) {
             lote,
             manzana,
             isla,
-            userId
+            userId,
+            rol
         });
     } else {
         res.render('partials/header', {

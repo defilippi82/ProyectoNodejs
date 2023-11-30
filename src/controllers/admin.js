@@ -1,7 +1,19 @@
-// Lógica de negocio
+
 const conn = require('../database/conn');
+const connection = require('../database/db');
+const userService = require('../controllers/adminServices');
 
 const adminController = {
+  adminViewGet: async (req, res) => {
+    try {
+      const usuarios = await userService.obtenerUsuarios(); // Obtener usuarios utilizando el servicio
+      console.log(usuarios);
+      res.render('admin', { usuarios: Array.isArray(usuarios) ? usuarios : [] }); // Renderizar la plantilla con los usuarios obtenidos
+    } catch (error) {
+      console.error('Error al obtener usuarios:', error.message);
+      res.status(500).send('Error al obtener usuarios para visualizar pag');
+    }
+  },
   // Redirección para crear un nuevo usuario
   crearUsuario: (req, res) => {
     res.redirect('/register'); // Redirigir a la ruta de registro
@@ -10,23 +22,20 @@ const adminController = {
   // Obtener todos los usuarios
   getUsuarios: async (req, res) => {
     try {
-      const usuarios= await conn.execute('SELECT * FROM usuarios');
-      return usuarios;
-      
+      const usuarios = await userService.obtenerUsuarios(); // Función para obtener usuarios de la base de datos
+      res.json(usuarios); // Responder con los usuarios obtenidos
     } catch (error) {
-      console.error('Error al obtener usuarios:', error);
-      res.status(500).send('Error al obtener usuarios');
+      throw new Error('Error al obtener usuarios desde la base de datos');
     }
   },
 
   // Obtener y mostrar reservas
   getReservas: async (req, res) => {
     try {
-      const reservas = await obtenerReservas(); // Lógica para obtener reservas desde la base de datos
-      res.render('reservas', { reservas });
+      const reservas = await connection.obtenerReservas(); // Función para obtener reservas de la base de datos
+      res.json(reservas); // Responder con las reservas obtenidas
     } catch (error) {
-      console.error('Error al obtener reservas:', error);
-      res.status(500).send('Error al obtener reservas');
+      throw new Error('Error al obtener reservas desde la base de datos');
     }
   },
 
@@ -34,11 +43,11 @@ const adminController = {
   obtenerUsuarioPorId: async (req, res) => {
     const { id } = req.params;
     try {
-      const usuarios = await conn.execute('SELECT * FROM usuarios WHERE id = ?', [id]);
+      const usuarios = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [id]);
       if (usuario.length === 0) {
         return res.status(404).send('Usuario no encontrado');
       }
-      res.json({ usuario });
+      res.json({ usuario: usuarios[0] }); // Devolver el usuario encontrado
     } catch (error) {
       console.error('Error al obtener usuario por ID:', error);
       res.status(500).send('Error al obtener usuario por ID');
@@ -50,7 +59,7 @@ const adminController = {
     const { id } = req.params;
     const { nombre, email, manzana, lote, isla, telefono, contrasena, rol } = req.body;
     try {
-      await conn.execute(
+      await connection.execute(
         'UPDATE usuarios SET nombre = ?, email = ?, manzana = ?, lote = ?, isla = ?, telefono = ?, contrasena = ?, rol = ? WHERE id = ?',
         [nombre, email, manzana, lote, isla, telefono, contrasena, rol, id]
       );
@@ -65,7 +74,7 @@ const adminController = {
   eliminarUsuario: async (req, res) => {
     const { id } = req.params;
     try {
-      await conn.execute('DELETE FROM usuarios WHERE id = ?', [id]);
+      await connection.execute('DELETE FROM usuarios WHERE id = ?', [id]);
       res.json({ mensaje: 'Usuario eliminado correctamente' });
     } catch (error) {
       console.error('Error al eliminar usuario:', error);

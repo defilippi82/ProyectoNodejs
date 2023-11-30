@@ -14,9 +14,10 @@ dotenv.config({
 const session = require('express-session');
 //const name = req.session.nombre || 'Debe iniciar sesión';
 app.use(session({
-    secret: 'secret',
+    secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 * 10 },
 }));
 //2 -middlewares Para poder capturar los datos del formulario (sin urlencoded nos devuelve "undefined")
 app.use(express.urlencoded({extended: false}));

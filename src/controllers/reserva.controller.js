@@ -1,5 +1,5 @@
 const bcryptjs = require('bcryptjs');
-const conexion = require('../database/db');
+const connection = require('../database/db');
 
 const reservaController = {
 
