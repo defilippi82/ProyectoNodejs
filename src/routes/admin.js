@@ -16,6 +16,7 @@ router.get('/', isAdmin, adminCtrl.adminViewGet);
 router.get('/', isAdmin, async (req, res) => {
   try {
     const usuarios = await adminCtrl.getUsuarios(); // Obtiene los usuarios utilizando la función del controlador
+    console.log(usuarios);
     res.render('admin', { usuarios });
   } catch (error) {
     console.error('Error al obtener usuarios:', error.message);
@@ -25,6 +26,7 @@ router.get('/', isAdmin, async (req, res) => {
 router.get('/usuarios', async (req, res) => {
   try {
     const usuarios = await adminCtrl.obtenerUsuarios(); // Llama a la función del controlador para obtener usuarios
+    console.log(usuarios);
     res.json(usuarios);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener usuarios' });
@@ -35,6 +37,7 @@ router.get('/usuarios', async (req, res) => {
 router.get('/reservas', async (req, res) => {
   try {
     const reservas = await adminCtrl.obtenerReservas(); // Llama a la función del controlador para obtener reservas
+    console.log(reservas);
     res.json(reservas);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener reservas' });

@@ -5,10 +5,20 @@ const userService = require('../controllers/adminServices');
 
 const adminController = {
   adminViewGet: async (req, res) => {
+    const usuarios = await userService.obtenerUsuarios();
+    console.log(usuarios);
+    res.render('admin',{usuarios}); 
+  },
+
+  /*adminViewGet: async (req, res) => {
+    
     try {
       const usuarios = await userService.obtenerUsuarios(); // Obtener usuarios utilizando el servicio
       console.log(usuarios);
-      res.render('admin', { usuarios: Array.isArray(usuarios) ? usuarios : [] }); // Renderizar la plantilla con los usuarios obtenidos
+      res.render('admin', 
+      { usuarios: Array.isArray(usuarios) ? usuarios : [] }
+      //{usuarioss}
+      ); // Renderizar la plantilla con los usuarios obtenidos
     } catch (error) {
       console.error('Error al obtener usuarios:', error.message);
       res.status(500).send('Error al obtener usuarios para visualizar pag');
@@ -17,7 +27,7 @@ const adminController = {
   // Redirección para crear un nuevo usuario
   crearUsuario: (req, res) => {
     res.redirect('/register'); // Redirigir a la ruta de registro
-  },
+  },*/
 
   // Obtener todos los usuarios
   getUsuarios: async (req, res) => {

@@ -34,6 +34,7 @@
     <div class="tab-content active" data-content="users">
       <!-- Table listing users -->
       <table class="table table-dark table-striped">
+        
         <thead>
           <tr>
             <th>ID</th>
@@ -49,23 +50,22 @@
         </thead>
 
         <tbody id="tabla">
-          <% usuarios.forEach(user => { %>
-            <tr>
+          <% if (typeof usuarios !== 'undefined') { %>
+            <% usuarios.forEach(user => { %>
+              tr>
               <td><%= user.id %></td>
               <td><%= user.nombre %></td>
               <td><%= user.email %></td>
-              <td><%= user.manzana %></td>
-              <td><%= user.lote %></td>
-              <td><%= user.isla %></td>
-              <td><%= user.telefono %></td>
-              <td><%= user.rol %></td>
-              <td>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-primary">Eliminar</button>  
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
+            
+                  <td>
+                    <button class="btn btn-primary">Editar</button>
+                    <button class="btn btn-primary">Eliminar</button>  
+                  </td>
+                </tr>
+              <% }) %>
+              <% } %>
+            </tbody>
+      
       </table>
 
       <button class="btn btn-primary">Agregar Usuario</button>
