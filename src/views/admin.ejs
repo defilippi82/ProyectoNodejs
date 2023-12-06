@@ -17,27 +17,15 @@
     <section id="admin-panel">
     <h1>Panel de Administración</h1>
 
-    <!-- Tab menu -->
+    
     <div>
-      <button id="usuariosButton" class="tab-content active" data-tab="users">Usuarios</button>
-      
-      <button id="reservasButton" class="tab-content" data-tab="reservations">Reservas</button>
-    </div>
-
-    <!-- Contenido de tabs -->
-    <div id="contenidoUsuarios">
-      <!-- Aquí se mostrará la información de usuarios -->
-    </div>
-    <div id="contenidoReservas" style="display: none;">
-      <!-- Aquí se mostrará la información de reservas -->
-    </div>
-    <div class="tab-content active" data-content="users">
-      <!-- Table listing users -->
+      <button id="editar" class="btn btn-primary" data-tab="users" >Editar</button>
+      <button id="actualizar" data-tab="users" class="btn btn-primary" >actualizar</button>
       <table class="table table-dark table-striped">
         
         <thead>
           <tr>
-            <th>ID</th>
+            <th style="display: none">ID</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Manzana</th>
@@ -45,17 +33,27 @@
             <th>Isla</th>
             <th>Teléfono</th>
             <th>Rol</th>
-            <th>Acciones</th>
+            <th>Acción</th>
+            
           </tr>  
         </thead>
-
+    
         <tbody id="tabla">
-          <% if (typeof usuarios !== 'undefined') { %>
-            <% usuarios.forEach(user => { %>
+          <% if (typeof data !== 'undefined') { %>
+            <% data.forEach(user => { %>
               tr>
-              <td><%= user.id %></td>
+              <td style="display: none"><%= user.id %></td>
               <td><%= user.nombre %></td>
               <td><%= user.email %></td>
+              <td><%= user.manzana %></td>
+              <td><%= user.lote %></td>
+              <td><%= user.isla %></td>
+              <td><%= user.telefono %></td>
+              <td><%= user.rol %></td>
+              <td><select name="accion" id="accion">
+                <option value="editar">Editar</option>
+                <option value="eliminar">Eliminar</option>
+              </select></td>
             
                   <td>
                     <button class="btn btn-primary">Editar</button>
@@ -67,6 +65,17 @@
             </tbody>
       
       </table>
+     
+    </div>
+
+      <div>
+        <button id="reservasButton" class="tab-content" data-tab="reservations">Reservas</button>
+      </div>
+      <div>
+        <%- include('partials/reservasRead.ejs'); %>
+    </div>
+    
+   
 
       <button class="btn btn-primary">Agregar Usuario</button>
     </div>
@@ -78,9 +87,9 @@
       </script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="<KEY>"
         crossorigin="anonymous"></script>
-      <script src="../controllers/admin.js"></script>
-      <script src="public/js/admin.js"></script>
-    
+       <script src="../controllers/admin.js"></script>
+       <script src="../js/admin.js"></script> </script>
+       
   </main>
 
 

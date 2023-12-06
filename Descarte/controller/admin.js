@@ -5,29 +5,12 @@ const userService = require('../controllers/adminServices');
 
 const adminController = {
   adminViewGet: async (req, res) => {
-    const usuarios = await userService.obtenerUsuarios();
-    console.log(usuarios);
-    res.render('admin',{usuarios}); 
-  },
+    //const usuarios = await userService.obtenerUsuarios();
+   
+    res.render('admin'); 
+  }};
 
-  /*adminViewGet: async (req, res) => {
-    
-    try {
-      const usuarios = await userService.obtenerUsuarios(); // Obtener usuarios utilizando el servicio
-      console.log(usuarios);
-      res.render('admin', 
-      { usuarios: Array.isArray(usuarios) ? usuarios : [] }
-      //{usuarioss}
-      ); // Renderizar la plantilla con los usuarios obtenidos
-    } catch (error) {
-      console.error('Error al obtener usuarios:', error.message);
-      res.status(500).send('Error al obtener usuarios para visualizar pag');
-    }
-  },
-  // Redirección para crear un nuevo usuario
-  crearUsuario: (req, res) => {
-    res.redirect('/register'); // Redirigir a la ruta de registro
-  },*/
+  
 
   // Obtener todos los usuarios
   getUsuarios: async (req, res) => {
@@ -37,7 +20,7 @@ const adminController = {
     } catch (error) {
       throw new Error('Error al obtener usuarios desde la base de datos');
     }
-  },
+  };
 
   // Obtener y mostrar reservas
   getReservas: async (req, res) => {
@@ -47,7 +30,7 @@ const adminController = {
     } catch (error) {
       throw new Error('Error al obtener reservas desde la base de datos');
     }
-  },
+  };
 
   // Obtener usuario por ID
   obtenerUsuarioPorId: async (req, res) => {
@@ -62,7 +45,7 @@ const adminController = {
       console.error('Error al obtener usuario por ID:', error);
       res.status(500).send('Error al obtener usuario por ID');
     }
-  },
+  };
 
   // Actualizar usuario por ID
   actualizarUsuario: async (req, res) => {
@@ -78,7 +61,7 @@ const adminController = {
       console.error('Error al actualizar usuario:', error);
       res.status(500).send('Error al actualizar usuario');
     }
-  },
+  };
 
   // Eliminar usuario por ID
   eliminarUsuario: async (req, res) => {
@@ -91,5 +74,5 @@ const adminController = {
       res.status(500).send('Error al eliminar usuario');
     }
   }
-};
+;
 module.exports = adminController;

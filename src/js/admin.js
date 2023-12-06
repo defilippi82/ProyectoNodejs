@@ -1,20 +1,44 @@
+const { obtenerUsuarios } = require("../controllers/adminServices.js");
+
 document.addEventListener('DOMContentLoaded', () => {
   const usuariosButton = document.getElementById('usuariosButton');
   const reservasButton = document.getElementById('reservasButton');
   const contenidoUsuarios = document.getElementById('contenidoUsuarios');
   const contenidoReservas = document.getElementById('contenidoReservas');
-
-  usuariosButton.addEventListener('click', async () => {
+  const btnsEdit = document.querySelectorAll('.editar');
+  /*usuariosButton.addEventListener('click', async () => {
+    try {
     const response = await fetch('/usuarios');
-    const data = await response.json();
+    if(!response.ok) {
+      console.log('Respuesta no válida', response.status);
+      return;
+    }
+     const data = await response.json();
     mostrarUsuarios(data);
-  });
+    }catch (error) {
+      console.log(error);
+    }
+  });*/
+  usuariosButton.addEventListener('click', obtenerUsuarios);
 
   reservasButton.addEventListener('click', async () => {
     const response = await fetch('/reservas');
     const data = await response.json();
     mostrarReservas(data);
   });
+  btnsEdit.forEach(btn => {
+
+    btn.addEventListener('click', () => {
+  
+      const userId = btn.parentElement.previousElementSibling.textContent;
+      
+      window.location.href = `/partials/adminUpdate`;
+  
+    });
+  
+  });
+  
+
 
   function mostrarUsuarios(data) {
    // Ordenar alfabéticamente

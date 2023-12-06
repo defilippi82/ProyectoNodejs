@@ -22,7 +22,7 @@ router.get('/', isAdmin, async (req, res) => {
     console.error('Error al obtener usuarios:', error.message);
     res.status(500).send('Error al obtener usuarios');
   }
-});
+});/*
 router.get('/usuarios', async (req, res) => {
   try {
     const usuarios = await adminCtrl.obtenerUsuarios(); // Llama a la función del controlador para obtener usuarios
@@ -31,7 +31,7 @@ router.get('/usuarios', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener usuarios' });
   }
-});
+});*/
 
 // Obtener reservas
 router.get('/reservas', async (req, res) => {
@@ -43,6 +43,17 @@ router.get('/reservas', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener reservas' });
   }
 });
+
+router.get('/usuarios', (req, res) => {
+  const usuarios = [
+    {
+      nombre: 'Fede',
+      email: 'prueba@prueba.com'
+    }
+  ];
+  res.json(usuarios)
+});
+
 /*
 // Obtener todos los usuarios
 router.get('/usuarios', adminCtrl.getUsuarios);

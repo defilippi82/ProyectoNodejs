@@ -55,7 +55,8 @@ const reservaRouter = require('./src/routes/reserva');
 const loginRouter = require('./src/routes/login');
 const contactoRouter = require('./src/routes/contacto');
 const authRouter = require('./src/routes/login');
-const adminRouter = require('./src/routes/admin');
+//const adminRouter = require('./src/routes/admin');
+const adminRoute = require('./src/routes/admin.routes');
 
 //const mainRouter = require('./src/routes/mainRouter');
 
@@ -68,7 +69,8 @@ app.use('/reserva', reservaRouter);
 app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/contacto', contactoRouter);
-app.use('/admin', adminRouter);
+//app.use('/admin', adminRouter);
+app.use('/admin', adminRoute);
 
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {
