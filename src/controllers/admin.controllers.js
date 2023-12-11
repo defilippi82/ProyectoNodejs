@@ -11,7 +11,14 @@ const {
     deleteReservaFromDB
 } = require('../model/model.js');
 
+
 const adminCtrl = {
+    
+    adminViewGet: async (req, res) => {
+        //const usuarios = await userService.obtenerUsuarios();
+       
+        res.render('admin'); 
+      },
 // OK
  async getAllUsuarios(req, res) {
     try {

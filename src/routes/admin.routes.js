@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const adminController = require('../controllers/admin.controllers');
-
+const isAdmin = (req, res, next) => {
+    if (req.session.rol === 'Administrador') {
+      next(); // Continuar si es administrador
+      } else {
+      res.redirect('/'); // Redirigir si no es administrador
+    }
+  };
 // OBTENER todos los usuarios - OK
-router.get("/", adminController.getAllUsuarios)
+router.get("/",isAdmin, adminController.adminViewGet, adminController.getAllUsuarios)
 
 // [-----
 // CREAR usuario VIEW
