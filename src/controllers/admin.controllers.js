@@ -21,8 +21,11 @@ const adminCtrl = {
       },
 // OK
  async getAllUsuarios(req, res) {
+    /*const users = await User.find();
+    res.json(users);*/
+
     try {
-        const datos = await getAllUsuariosFromDB();
+        const datos = await model.getAllUsuariosFromDB();
         console.log('usuarios', datos);
         res.render("admin", {
             data: datos
@@ -32,33 +35,19 @@ const adminCtrl = {
         res.status(500).send('Internal Server Error');
     }
 },
-
+getUsuarioById: async (req, res) => {
+    // obtener usuario por id 
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  },
 // OK
+
  async  addUsuario(req, res) {
-    try {
-        res.redirect("register" )
-    } catch (error) {
-        console.error('Error adding usuario:', error);
-        res.status(500).send('Internal Server Error');
-    }
+    
+        res.redirect("register");
 
 },
 
-// OK
- async  addUsuarioPOST(req, res) {
-    const newUsuarioData = req.body;
-    try {
-        const nuevoUsuario = await addUsuarioFromDB(newUsuarioData);
-        console.log("nuevoUsuario", nuevoUsuario)
-        res.redirect("register" )
-    } catch (error) {
-        console.error('Error adding Usuario:', error);
-        res.status(500).send('Internal Server Error');
-    }
-
-},
-
-// OK
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
     try {
@@ -114,7 +103,7 @@ const adminCtrl = {
 
 },
 //RESERVAS
-// OK
+
  async  getAllReservas(req, res) {
     try {
         const datos = await getAllReservasFromDB();
@@ -130,28 +119,8 @@ const adminCtrl = {
 
 // OK
  async  addReserva(req, res) {
-    try {
-        res.render("reserva", {
-            titulo: "Crear reservas"
-        })
-    } catch (error) {
-        console.error('Error adding reservas:', error);
-        res.status(500).send('Internal Server Error');
-    }
-
-},
-
-// OK
- async  addReservaPOST(req, res) {
-    const newReservaData = req.body;
-    try {
-        const nuevoreserva = await addReservaFromDB(newReservaData);
-        console.log("nuevoreserva", nuevoreserva)
-        res.redirect("/admin" + "?mensaje=reserva agregado")
-    } catch (error) {
-        console.error('Error adding reserva:', error);
-        res.status(500).send('Internal Server Error');
-    }
+   
+        res.render("reserva");
 
 },
 

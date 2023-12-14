@@ -19,6 +19,15 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 60000 * 10 },
 }));
+app.use(function (req, res, next) {  
+
+    res.header("Access-Control-Allow-Origin", "*"); // permitir requests de cualquier origen
+  
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
+    next();
+  
+  });
 //2 -middlewares Para poder capturar los datos del formulario (sin urlencoded nos devuelve "undefined")
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());

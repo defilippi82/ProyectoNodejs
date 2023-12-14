@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const contenidoUsuarios = document.getElementById('contenidoUsuarios');
   const contenidoReservas = document.getElementById('contenidoReservas');
   const btnsEdit = document.querySelectorAll('.editar');
-  /*usuariosButton.addEventListener('click', async () => {
+
+
+  usuariosButton.addEventListener('click', async () => {
     try {
-    const response = await fetch('/usuarios');
+    const response = await fetch('/admin/usuarios');
     if(!response.ok) {
       console.log('Respuesta no válida', response.status);
       return;
@@ -18,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }catch (error) {
       console.log(error);
     }
-  });*/
-  usuariosButton.addEventListener('click', obtenerUsuarios);
+  });
+ 
 
   reservasButton.addEventListener('click', async () => {
-    const response = await fetch('/reservas');
+    const response = await fetch('/admin/reserva');
     const data = await response.json();
     mostrarReservas(data);
   });

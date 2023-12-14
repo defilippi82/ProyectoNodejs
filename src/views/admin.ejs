@@ -19,6 +19,7 @@
 
     
     <div>
+      <button id="usuariosButton" class="btn btn-primary" data-tab="users" >Usuarios</button>
       <button id="editar" class="btn btn-primary" data-tab="users" >Editar</button>
       <button id="actualizar" data-tab="users" class="btn btn-primary" >actualizar</button>
       <table class="table table-dark table-striped">
@@ -40,16 +41,16 @@
     
         <tbody id="tabla">
           <% if (typeof data !== 'undefined') { %>
-            <% data.forEach(user => { %>
+            <% data.forEach(usuario => { %>
               tr>
-              <td style="display: none"><%= user.id %></td>
-              <td><%= user.nombre %></td>
-              <td><%= user.email %></td>
-              <td><%= user.manzana %></td>
-              <td><%= user.lote %></td>
-              <td><%= user.isla %></td>
-              <td><%= user.telefono %></td>
-              <td><%= user.rol %></td>
+              <td style="display: none"><%= usuario.id %></td>
+              <td><%= usuario.nombre %></td>
+              <td><%= usuario.email %></td>
+              <td><%= usuario.manzana %></td>
+              <td><%= usuario.lote %></td>
+              <td><%= usuario.isla %></td>
+              <td><%= usuario.telefono %></td>
+              <td><%= usuario.rol %></td>
               <td><select name="accion" id="accion">
                 <option value="editar">Editar</option>
                 <option value="eliminar">Eliminar</option>

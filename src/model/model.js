@@ -122,4 +122,6 @@ editReservaFromDB : async (id, updatedReservaData) => {
 }
 
 };
-module.exports = model;
+module.exports = {
+    model}
+    ;
