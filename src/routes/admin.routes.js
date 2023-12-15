@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const adminController = require('../controllers/admin.controllers');
+const adminController = require('../controllers/admin.controllers.js');
+const adminCtrl = require('../controllers/admin.controllers.js');
 
 const isAdmin = (req, res, next) => {
   if (req.session.rol === 'Administrador') {
@@ -10,11 +11,11 @@ const isAdmin = (req, res, next) => {
   }
 };
 // Vista admin
-router.get("/", isAdmin, adminController.adminViewGet)
+router.get("/", adminCtrl.adminViewGet);
 
 // USUARIOS
 // OBTENER todos los usuarios - OK
-router.get("/usuarios", adminController.getAllUsuarios)
+router.get("/usuarios", adminCtrl.getAllUsuarios)
 
 //Crar usuario VIEW
 router.get("/usuarios/crear", adminController.addUsuario)
@@ -34,17 +35,17 @@ router.post("/usuarios/editar/:id", adminController.editUsuarioPOST)
 
 //RESERVAS
 // OBTENER todos los Reservas 
-router.get("/reserva", adminController.getAllReservas)
+router.get("/reservas", adminController.getAllReservas)
 
 // Tomar Reserva para VER LAS RESERVAS POR ID VIEW
-router.get("/reserva/editar/:id", adminController.editReserva)
+router.get("/reservas/editar/:id", adminController.editReserva)
 
 // Manejo de datos del form EDITAR LAS RESERVAS POR ID
-router.post("/reserva/editar/:id", adminController.editReservaPOST)
+router.post("/reservas/editar/:id", adminController.editReservaPOST)
 // -----]
 
 // BORRAR Reserva
-router.get("/reserva/borrar/:id", adminController.deleteReserva)
+router.get("/reservas/borrar/:id", adminController.deleteReserva)
 
 
 module.exports = router;

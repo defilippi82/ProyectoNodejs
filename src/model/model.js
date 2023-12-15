@@ -3,11 +3,13 @@ const connection = require('../database/db');
 const model = {
     //USUARIOS
     
-     getAllUsuariosFromDB : async () => {
+     getAllUsuariosFromDB : async (id, nombre, email, manzana, lote, isla, telefono, rol) => {
+    
         try {
-            const [datos] = await connection.query('SELECT * FROM cube.usuarios');
+            const datos = await connection.query('SELECT * FROM usuarios WHERE id = ? AND nombre = ? AND email = ? AND manzana = ? AND lote = ? AND isla = ? AND telefono = ? AND rol = ?', [id, nombre, email, manzana, lote, isla, telefono, rol]);
+           // const datos = await connection.query('SELECT * FROM cube.usuarios');
             console.log('datos de los usuarios', datos);
-            return datos;
+            return datos[0];
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
@@ -53,7 +55,7 @@ const model = {
     // Obtener todos los reservas desde la base de datos
  getAllReservaFromDB : async () => {
     try {
-        const [datos] = await connection.query('SELECT * FROM reservas');
+        const datos = await connection.query('SELECT * FROM reservas');
         return datos;
     } catch (error) {
         console.error('Error querying MySQL:', error);
@@ -97,6 +99,4 @@ editReservaFromDB : async (id, updatedReservaData) => {
 }
 
 };
-module.exports = {
-    model}
-    ;
+module.exports = { model};

@@ -1,36 +1,33 @@
-const {
-    getAllUsuariosFromDB,
-    addUsuarioFromDB,
-    getUsuarioFromDB,
-    updateUsuarioFromDB,
-    deleteUsuarioFromDB,
-    getAllReservasFromDB,
-    addReservaFromDB,
-    getReservaFromDB,
-    updateReservaFromDB,
-    deleteReservaFromDB
-} = require('../model/model.js');
+const {model} = require('../model/model.js');
 
 
 const adminCtrl = {
     
     adminViewGet: async (req, res) => {
-        //const usuarios = await userService.obtenerUsuarios();
+       /* //const usuarios = await userService.obtenerUsuarios();
        
-        res.render('admin'); 
-      },
-// OK
- async getAllUsuarios(req, res) {
-    /*const users = await User.find();
-    res.json(users);*/
+        res.render('admin'); */
+        try {
+            const usuarios = await model.getAllUsuariosFromDB(id, nombre, email, manzana, lote, isla, telefono, rol); // Obtener usuarios
+            
+            res.render('admin', { data: usuarios });
+        } catch (error) {
+            console.error('Error getting data:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
+      
+
+async getAllUsuarios (req, res) {
+   
 
     try {
         const datos = await model.getAllUsuariosFromDB();
         console.log('usuarios', datos);
-        res.render("admin", {
+        res.render("usuarios", {
             data: datos
             })
-    } catch (error) {
+            } catch (error) {
         console.error('Error getting usuarios:', error);
         res.status(500).send('Internal Server Error');
     }
