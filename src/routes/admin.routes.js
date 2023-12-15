@@ -14,37 +14,37 @@ router.get("/", isAdmin, adminController.adminViewGet)
 
 // USUARIOS
 // OBTENER todos los usuarios - OK
-router.get("/admin/usuarios", adminController.getAllUsuarios)
+router.get("/usuarios", adminController.getAllUsuarios)
 
 //Crar usuario VIEW
-router.get("/admin/crear", adminController.addUsuario)
+router.get("/usuarios/crear", adminController.addUsuario)
 
 // Tomar usuario para ACTUALIZAR VIEW
-router.get("/admin/editar/:id", adminController.editUsuario)
+router.get("/usuarios/editar/:id", adminController.editUsuario)
 
 // BORRAR usuario
-router.get("/admin/borrar/:id", adminController.deleteUsuario)
+router.get("/usuarios/borrar/:id", adminController.deleteUsuario)
 
 // Manejo de datos del form para Crear usuario
-router.post("/admin/editar", adminController.addUsuario)
+//router.post("/usuarios/editar", adminController.addUsuario)
 // 
 // Manejo de datos del form para editar usuario
-router.post("/admin/editar/:id", adminController.editUsuarioPOST)
+router.post("/usuarios/editar/:id", adminController.editUsuarioPOST)
 // 
 
 //RESERVAS
 // OBTENER todos los Reservas 
-router.get("/admin/reserva", adminController.getAllReservas)
+router.get("/reserva", adminController.getAllReservas)
 
 // Tomar Reserva para VER LAS RESERVAS POR ID VIEW
-router.get("/admin/reserva/editar/:id", adminController.editReserva)
+router.get("/reserva/editar/:id", adminController.editReserva)
 
 // Manejo de datos del form EDITAR LAS RESERVAS POR ID
-router.post("/admin/reserva/editar/:id", adminController.editReservaPOST)
+router.post("/reserva/editar/:id", adminController.editReservaPOST)
 // -----]
 
 // BORRAR Reserva
-router.get("/admin/reserva/borrar/:id", adminController.deleteReserva)
+router.get("/reserva/borrar/:id", adminController.deleteReserva)
 
 
 module.exports = router;

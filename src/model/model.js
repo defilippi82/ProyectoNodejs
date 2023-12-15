@@ -5,9 +5,9 @@ const model = {
     
      getAllUsuariosFromDB : async () => {
         try {
-            const datos = await connection.query('SELECT * FROM cube.usuarios');
-            console.log('datos de los usuarios', datos.rows);
-            return datos.rows;
+            const [datos] = await connection.query('SELECT * FROM cube.usuarios');
+            console.log('datos de los usuarios', datos);
+            return datos;
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
@@ -17,27 +17,15 @@ const model = {
     // Obtener un usuario por ID desde la base de datos
      getUsuarioPorIDFromDB : async (id) => {
         try {
-            const [dato] = await connection.query('SELECT * FROM usuarios WHERE id = ?', [id]);
-            return dato[0];
+            const [datos] = await connection.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+            return datos;
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
         }
     },
     
-    // Agregar un nuevo usuario a la base de datos
-     addUsuarioFromDB : async (usuarioData) => {
-        try {
-            const [result] = await connection.query('INSERT INTO usuarios SET ?', [usuarioData]);
-            const nuevoUsuarioID = result.insertId;
-            const nuevoUsuario = await getUsuarioPorIDFromDB(nuevoUsuarioID);
-            return nuevoUsuario;
-        } catch (error) {
-            console.error('Error inserting into MySQL:', error);
-            throw error;
-        }
-    },
-    
+      
     // Editar un usuario por ID en la base de datos
     editUsuarioFromDB : async (id, updatedUsuarioData) => {
         try {
@@ -76,23 +64,10 @@ const model = {
 // Obtener un Reserva por ID desde la base de datos
 getReservaPorIDFromDB : async (id) => {
     try {
-        const [dato] = await connection.query('SELECT * FROM reservas WHERE id = ?', [id]);
-        return dato[0];
+        const [datos] = await connection.query('SELECT * FROM reservas WHERE id = ?', [id]);
+        return datos;
     } catch (error) {
         console.error('Error querying MySQL:', error);
-        throw error;
-    }
-},
-
-// Agregar un nuevo reserva a la base de datos
- addReservaFromDB : async (reservaData) => {
-    try {
-        const [result] = await connection.query('INSERT INTO reservas SET ?', [reservaData]);
-        const nuevaReservaID = result.insertId;
-        const nuevoReserva = await getReservaPorIDFromDB(nuevaReservaID);
-        return nuevoReserva;
-    } catch (error) {
-        console.error('Error inserting into MySQL:', error);
         throw error;
     }
 },
