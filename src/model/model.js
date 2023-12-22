@@ -1,15 +1,16 @@
-const connection = require('../database/db');
+const {connectDB} = require('../database/db');
 
 const model = {
     //USUARIOS
     
-     getAllUsuariosFromDB : async (id, nombre, email, manzana, lote, isla, telefono, rol) => {
+     getAllUsuariosFromDB : async () => {
     
         try {
-            const datos = await connection.query('SELECT * FROM usuarios WHERE id = ? AND nombre = ? AND email = ? AND manzana = ? AND lote = ? AND isla = ? AND telefono = ? AND rol = ?', [id, nombre, email, manzana, lote, isla, telefono, rol]);
-           // const datos = await connection.query('SELECT * FROM cube.usuarios');
-            console.log('datos de los usuarios', datos);
-            return datos[0];
+            const connection = await connectDB();
+           // const datos = await connection.query('SELECT * FROM usuarios WHERE id = ? AND nombre = ? AND email = ? AND manzana = ? AND lote = ? AND isla = ? AND telefono = ? AND rol = ?');
+            const [rows, fields] = await connection.execute('SELECT * FROM usuarios');
+            console.log('datos de los usuarios de getAllUsuariosFromDB', rows);
+            return rows;
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
@@ -53,10 +54,12 @@ const model = {
     },
     //RESERVAS
     // Obtener todos los reservas desde la base de datos
- getAllReservaFromDB : async () => {
+    getAllReservasFromDB : async () => {
     try {
-        const datos = await connection.query('SELECT * FROM reservas');
-        return datos;
+        const connection = await connectDB();
+        const [rows, fields] = await connection.execute('SELECT * FROM reservas');
+        console.log('datos de los usuarios de getAllreservasFromDB', rows);
+            return rows;
     } catch (error) {
         console.error('Error querying MySQL:', error);
         throw error;

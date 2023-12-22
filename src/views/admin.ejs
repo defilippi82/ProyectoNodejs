@@ -14,56 +14,7 @@
 
   <main class="container-fluid">
 
-    <section class="admin_table">
-
-      <div class="admin_table__header" style="display: none;">ID</div>
-      <div class="admin_table__header">Nombre</div>
-      <div class="admin_table__header">Email</div>
-      <div class="admin_table__header">Manzana</div>
-      <div class="admin_table__header">Lote</div>
-      <div class="admin_table__header">Isla</div>
-      <div class="admin_table__header">Teléfono</div>
-      <div class="admin_table__header">Rol</div>
-      <div class="admin_table__header"></div>
-      <div class="admin_table__header"></div>
-      
-      
-
-      <% data.forEach(usuario=> { %>
-          <div class="admin_table__item" style="display: none;">
-              <%= usuario.id %>
-          </div>
-          <div class="admin_table__item">
-              <%= usuario.nombre %>
-          </div>
-          <div class="admin_table__item">
-              <%= usuario.email %>
-          </div>
-          <div class="admin_table__item">
-              <%= usuario.manzana %>
-          </div>
-          <div class="admin_table__item">
-            <%= usuario.lote %>
-        </div>
-        <div class="admin_table__item">
-          <%= usuario.isla %>
-      </div>
-      <div class="admin_table__item">
-        <%= usuario.telefono %>
-    </div>
-    <div class="admin_table__item">
-      <%= usuario.rol %>
-  </div>
-          <div class="admin_table__item">
-            <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/src/views/partials/adminUpdate.ejs">Editar</a>
-          </div>
-          <div class="admin_table__item">
-            <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/usuarios/borrar/<%= usuario.id %>">Borrar</a>
-          </div>
-          <% }) %>
-  </section>
-
-    <section id="admin-panel">
+        <section id="admin-panel">
     <h1>Panel de Administración</h1>
 
     
@@ -88,72 +39,78 @@
             <th>Acción</th>
             
           </tr>  
-       <!--</thead>
-    
-          <% if (typeof data !== 'undefined') { %>
-            <% data.forEach(usuario => { %>
-              tr>
-              <td style="display: none"><%= usuario.id %></td>
-              <td><%= usuario.nombre %></td>
-              <td><%= usuario.email %></td>
-              <td><%= usuario.manzana %></td>
-              <td><%= usuario.lote %></td>
-              <td><%= usuario.isla %></td>
-              <td><%= usuario.telefono %></td>
-              <td><%= usuario.rol %></td>
-              <td>
-                <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/src/views/partials/adminUpdate.ejs">Editar</a>
-                <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/usuarios/borrar/<%= usuario.id %>">Borrar</a>
-               </td>
+          <tbody >
             
-                </tr>
-              <% }) %>
-              <% } %>
-            </tbody>
-            
-          </table>
-        </div>
+            <% if (Array.isArray(data) && data.length > 0) { %>
+              <% data.forEach(usuarios=> { %>
+                <tr>
+                <td style="display: none"><%= usuarios.id %></td>
+                <td><%= usuarios.nombre %></td>
+                <td><%= usuarios.email %></td>
+                <td><%= usuarios.manzana %></td>
+                <td><%= usuarios.lote %></td>
+                <td><%= usuarios.isla %></td>
+                <td><%= usuarios.telefono %></td>
+                <td><%= usuarios.rol %></td>
+              
+                    <td>
+                      <button class="btn btn-primary">Editar</button>
+                      <button class="btn btn-primary">Eliminar</button>  
+                    </td>
+                  </tr>
+                <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="8">No hay datos de usuarios disponibles.</td>
+                  </tr>
+                <% } %>
+              </tbody>
+              
+            </table>
+            <div>
+      <a id="reserva" type="button" class="btn btn-primary"  href="/reserva">Agregar Reservas</a>
+      <a id="reserva" type="button" class="btn btn-primary"  href="/reservas">ver Reservas</a>
     </div>
+      <table class="table table-dark table-striped">
 
-      <div>
-        <a id="reserva" type="button" class="btn btn-primary"  href="/reserva">Agregar reservas</a>
-        <a id="reserva" type="button" class="btn btn-primary"  href="/reservas">Reservas</a>
-        
-      </div>
-      <div>
-        <table class="table table-dark table-striped">
-
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Usuario</th>
-              <th>Fecha</th>
-              <th>Hora Inicio</th>
-              <th>Estado</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-                  
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Usuario</th>
+                  <th>Fecha</th>
+                  <th>Hora Inicio</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+                      
+              
+                <tbody >
+                  <% if (Array.isArray(reservas) && reservas.length > 0) { %>
+                    <% reservas.forEach(reservations=> { %>
+                      <tr>
+                      <td><%= reservations.id %></td>
+                      <td><%= reservations.id_usuario %></td>
+                      <td><%= reservations.fecha %></td>
+                      <td><%= reservations.hora_inicio %></td>
+                      <td><%= reservations.estado %></td>
+                    
+                          <td>
+                            <button class="btn btn-primary">Editar</button>
+                            <button class="btn btn-primary">Eliminar</button>  
+                          </td>
+                        </tr>
+                        <% }); %>
+                        <% } else { %>
+                          <tr>
+                            <td colspan="8">No hay datos de reservas disponibles.</td>
+                          </tr>
+                        <% } %>
+                    </tbody>
+                
+              </table>
           
-            <tbody id="tabla">
-              <% if (typeof reservas !== 'undefined') { %>
-                <% reservas.forEach(reservations=> { %>
-                  tr>
-                  <td><%= reservations.id %></td>
-                  <td><%= reservations.id_usuario %></td>
-                  <td><%= reservations.fecha %></td>
-                  <td><%= reservations.hora_inicio %></td>
-                  <td><%= reservations.estado %></td>
-                  <td>
-                    <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/src/views/partials/adminUpdate.ejs">Editar</a>
-                    <a id="admin_table__trash-link" class="admin_table__icon-trash-button" onclick="return confirm('Estás seguro?');" href="/reservas/borrar/<%= usuario.id %>">Borrar</a>
-                   </td>
-                    </tr>
-                  <% }) %>
-                  <% } %>
-                </tbody>-->
-            
-          </table>
+         
     </div>
     
     </div>
@@ -174,7 +131,7 @@
 
     <%- include('partials/footer'); %>
   </footer>
-
+  
 </body>
 
 </html>

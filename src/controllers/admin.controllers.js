@@ -4,13 +4,13 @@ const {model} = require('../model/model.js');
 const adminCtrl = {
     
     adminViewGet: async (req, res) => {
-       /* //const usuarios = await userService.obtenerUsuarios();
        
-        res.render('admin'); */
         try {
-            const usuarios = await model.getAllUsuariosFromDB(id, nombre, email, manzana, lote, isla, telefono, rol); // Obtener usuarios
-            
-            res.render('admin', { data: usuarios });
+            const usuarios = await model.getAllUsuariosFromDB(); // Obtener usuarios
+            const reservas = await model.getAllReservasFromDB(); // Obtener reservas
+            console.log('datos de los usuarios Controlador', usuarios); 
+            res.render('admin', { data: usuarios, reservas: reservas});
+           
         } catch (error) {
             console.error('Error getting data:', error);
             res.status(500).send('Internal Server Error');
@@ -20,15 +20,13 @@ const adminCtrl = {
 
 async getAllUsuarios (req, res) {
    
-
     try {
-        const datos = await model.getAllUsuariosFromDB();
-        console.log('usuarios', datos);
-        res.render("usuarios", {
-            data: datos
-            })
-            } catch (error) {
-        console.error('Error getting usuarios:', error);
+        const usuarios = await model.getAllUsuariosFromDB(); // Obtener usuarios
+        console.log('datos de los usuarios Controlador', usuarios); 
+        res.render('admin', { data: usuarios });
+       
+    } catch (error) {
+        console.error('Error getting data:', error);
         res.status(500).send('Internal Server Error');
     }
 },
@@ -103,11 +101,10 @@ getUsuarioById: async (req, res) => {
 
  async  getAllReservas(req, res) {
     try {
-        const datos = await getAllReservasFromDB();
-        res.render("reservasRead", {
-            reservas: datos,
-            mensaje: req.query.mensaje || ""
-        })
+        const reservas = await model.getAllReservasFromDB();
+        console.log('datos de las reservas Controlador', reservas);
+        res.render("/reservas", reservas);
+
     } catch (error) {
         console.error('Error getting reservas:', error);
         res.status(500).send('Internal Server Error');
