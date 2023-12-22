@@ -54,8 +54,8 @@
                 <td><%= usuarios.rol %></td>
               
                     <td>
-                      <button class="btn btn-primary">Editar</button>
-                      <button class="btn btn-primary">Eliminar</button>  
+                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/:id">editar</a>
+                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/borrar/:id">borrar</a>
                     </td>
                   </tr>
                 <% }); %>
@@ -94,10 +94,11 @@
                       <td><%= reservations.fecha %></td>
                       <td><%= reservations.hora_inicio %></td>
                       <td><%= reservations.estado %></td>
-                    
+                      
                           <td>
-                            <button class="btn btn-primary">Editar</button>
-                            <button class="btn btn-primary">Eliminar</button>  
+                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/editar/:id">editar</a>
+                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/borrar/:id">borrar</a>
+                              
                           </td>
                         </tr>
                         <% }); %>

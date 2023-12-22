@@ -37,21 +37,17 @@ getUsuarioById: async (req, res) => {
   },
 // OK
 
- async  addUsuario(req, res) {
-    
-        res.redirect("register");
-
-},
+async addUsuario(req, res) {
+    res.redirect("/register");
+  },
 
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
     try {
-        const usuario = await getUsuarioPorIDFromDB(usuarioID);
+        const usuario = await model.getUsuarioPorIDFromDB(usuarioID);
         if (usuario) {
-            // res.status(200).json(usuario);
-            res.render("adminUpdate", {
-                data: usuario
-            })
+           
+            res.render("adminUpdate", {  data: usuario})
         } else {
             res.status(404).send('Usuario not found');
         }
@@ -59,17 +55,14 @@ getUsuarioById: async (req, res) => {
         console.error('Error getting usuario by ID:', error);
         res.status(500).send('Internal Server Error');
     }
-
 },
-
-// OK
  async editUsuarioPOST(req, res) {
     const usuarioID = req.params.id;
     const updatedUsuarioData = req.body;
     try {
-        const updatedUsuario = await editUsuarioFromDB(usuarioID, updatedUsuarioData);
+        const updatedUsuario = await model.editUsuarioFromDB(usuarioID, updatedUsuarioData);
         if (updatedUsuario) {
-            // res.status(200).json(updatedUsuario);
+           
             res.redirect("/admin" + "?mensaje=Usuario actualizado")
         } else {
             res.status(404).send('Usuario not found');
@@ -84,7 +77,7 @@ getUsuarioById: async (req, res) => {
  async  deleteUsuario(req, res) {
     const usuarioID = req.params.id;
     try {
-        const deletedUsuario = await deleteUsuarioFromDB(usuarioID);
+        const deletedUsuario = await model.deleteUsuarioFromDB(usuarioID);
         if (deletedUsuario) {
             // res.status(200).json(deletedUsuario);
             res.redirect("/admin" + "?mensaje=Usuario Borrado")
@@ -112,22 +105,18 @@ getUsuarioById: async (req, res) => {
 },
 
 // OK
- async  addReserva(req, res) {
-   
+ async  addReserva(req, res) {   
         res.render("reserva");
-
 },
 
 // OK
  async  editReserva(req, res) {
     const reservaID = req.params.id;
     try {
-        const reserva = await getReservaPorIDFromDB(reservaID);
+        const reserva = await model.getReservaPorIDFromDB(reservaID);
         if (reserva) {
             // res.status(200).json(reserva);
-            res.render("reservaUpdate", {
-                reservas: reserva
-            })
+            res.render("reservaUpdate", { reservas: reserva })
         } else {
             res.status(404).send('Reserva not found');
         }
@@ -137,13 +126,11 @@ getUsuarioById: async (req, res) => {
     }
 
 },
-
-// OK
  async  editReservaPOST(req, res) {
     const reservaID = req.params.id;
     const updatedReservaData = req.body;
     try {
-        const updatedReserva = await editReservaFromDB(reservaID, updatedReservaData);
+        const updatedReserva = await model.editReservaFromDB(reservaID, updatedReservaData);
         if (updatedReserva) {
             // res.status(200).json(updatedReserva);
             res.redirect("/admin" + "?mensaje=Reserva actualizado")
@@ -160,9 +147,9 @@ getUsuarioById: async (req, res) => {
  async  deleteReserva(req, res) {
     const reservaID = req.params.id;
     try {
-        const deletedReserva = await deleteReservaFromDB(reservaID);
+        const deletedReserva = await model.deleteReservaFromDB(reservaID);
         if (deletedReserva) {
-            // res.status(200).json(deletedReserva);
+            
             res.redirect("/admin" + "?mensaje=reserva Borrado")
         } else {
             res.status(404).send('reserva not found');
