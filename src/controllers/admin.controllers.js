@@ -47,7 +47,7 @@ async addUsuario(req, res) {
         const usuario = await model.getUsuarioPorIDFromDB(usuarioID);
         if (usuario) {
            
-            res.render("adminUpdate", {  data: usuario})
+            res.render("/adminUpdate", {data: usuario})
         } else {
             res.status(404).send('Usuario not found');
         }
@@ -80,7 +80,7 @@ async addUsuario(req, res) {
         const deletedUsuario = await model.deleteUsuarioFromDB(usuarioID);
         if (deletedUsuario) {
             // res.status(200).json(deletedUsuario);
-            res.redirect("/admin" + "?mensaje=Usuario Borrado")
+            res.render("/admin?mensaje=Usuario eliminado"   )
         } else {
             res.status(404).send('usuario not found');
         }
@@ -103,13 +103,9 @@ async addUsuario(req, res) {
         res.status(500).send('Internal Server Error');
     }
 },
-
-// OK
  async  addReserva(req, res) {   
         res.render("reserva");
 },
-
-// OK
  async  editReserva(req, res) {
     const reservaID = req.params.id;
     try {

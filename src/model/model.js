@@ -7,9 +7,8 @@ const model = {
     
         try {
             const connection = await connectDB();
-           // const datos = await connection.query('SELECT * FROM usuarios WHERE id = ? AND nombre = ? AND email = ? AND manzana = ? AND lote = ? AND isla = ? AND telefono = ? AND rol = ?');
             const [rows, fields] = await connection.execute('SELECT * FROM usuarios');
-            console.log('datos de los usuarios de getAllUsuariosFromDB', rows);
+            //console.log('datos de los usuarios de getAllUsuariosFromDB', rows);
             return rows;
         } catch (error) {
             console.error('Error querying MySQL:', error);
@@ -20,8 +19,10 @@ const model = {
     // Obtener un usuario por ID desde la base de datos
      getUsuarioPorIDFromDB : async (id) => {
         try {
+            const connection = await connectDB();
             const [datos] = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [id]);
-            return datos[0];
+            console.log('datos de los usuariosID de getUsuarioPorIDFromDB', datos);
+            return datos;
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
@@ -32,6 +33,7 @@ const model = {
     // Editar un usuario por ID en la base de datos
     editUsuarioFromDB : async (id, updatedUsuarioData) => {
         try {
+            const connection = await connectDB();
             await connection.execute('UPDATE usuarios SET ? WHERE id = ?', [updatedUsuarioData, id]);
             const updatedUsuario = await model.getUsuarioPorIDFromDB(id);
             return updatedUsuario;
@@ -44,6 +46,7 @@ const model = {
     // Borrar un usuario por ID de la base de datos
      deleteUsuarioFromDB : async (id) => {
         try {
+            const connection = await connectDB();
             const deletedUsuario = await model.getUsuarioPorIDFromDB(id);
             await connection.execute('DELETE FROM usuarios WHERE id = ?', [id]);
             return deletedUsuario;
@@ -69,6 +72,7 @@ const model = {
 // Obtener un Reserva por ID desde la base de datos
 getReservaPorIDFromDB : async (id) => {
     try {
+        const connection = await connectDB();
         const [datos] = await connection.execute('SELECT * FROM reservas WHERE id = ?', [id]);
         return datos[0];
     } catch (error) {
@@ -80,6 +84,7 @@ getReservaPorIDFromDB : async (id) => {
 // Editar un Reserva por ID en la base de datos
 editReservaFromDB : async (id, updatedReservaData) => {
     try {
+        const connection = await connectDB();
         await connection.execute('UPDATE reservas SET ? WHERE id = ?', [updatedReservaData, id]);
         const updatedReserva = await model.getReservaPorIDFromDB(id);
         return updatedReserva;
@@ -92,6 +97,7 @@ editReservaFromDB : async (id, updatedReservaData) => {
 // Borrar un reserva por ID de la base de datos
  deleteReservaFromDB : async (id) => {
     try {
+        const connection = await connectDB();
         const deletedReserva = await model.getReservaPorIDFromDB(id);
         await connection.execute('DELETE FROM reservas WHERE id = ?', [id]);
         return deletedReserva;
