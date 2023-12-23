@@ -8,8 +8,8 @@ const adminCtrl = {
         try {
             const usuarios = await model.getAllUsuariosFromDB(); // Obtener usuarios
             const reservas = await model.getAllReservasFromDB(); // Obtener reservas
-            console.log('datos de los usuarios Controlador', usuarios); 
-            res.render('admin', { data: usuarios, reservas: reservas});
+            //console.log('datos de los usuarios Controlador', usuarios); 
+            res.render('admin/admin', { data: usuarios, reservas: reservas});
            
         } catch (error) {
             console.error('Error getting data:', error);
@@ -22,7 +22,7 @@ async getAllUsuarios (req, res) {
    
     try {
         const usuarios = await model.getAllUsuariosFromDB(); // Obtener usuarios
-        console.log('datos de los usuarios Controlador', usuarios); 
+        //console.log('datos de los usuarios Controlador', usuarios); 
         res.render('admin', { data: usuarios });
        
     } catch (error) {
@@ -30,12 +30,13 @@ async getAllUsuarios (req, res) {
         res.status(500).send('Internal Server Error');
     }
 },
+//no se utiliza buscar por id
+/*
 getUsuarioById: async (req, res) => {
     // obtener usuario por id 
     const user = await User.findById(req.params.id);
     res.json(user);
-  },
-// OK
+  },*/
 
 async addUsuario(req, res) {
     res.redirect("/register");
@@ -44,10 +45,10 @@ async addUsuario(req, res) {
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
     try {
-        const usuario = await model.getUsuarioPorIDFromDB(usuarioID);
+        const usuarios = await model.getUsuarioPorIDFromDB(usuarioID);
         if (usuario) {
            
-            res.render("/adminUpdate", {data: usuario})
+            res.render("admin/adminUpdate", {usuarios})
         } else {
             res.status(404).send('Usuario not found');
         }
@@ -96,7 +97,7 @@ async addUsuario(req, res) {
     try {
         const reservas = await model.getAllReservasFromDB();
         console.log('datos de las reservas Controlador', reservas);
-        res.render("/reservas", reservas);
+        res.render("admin/reservas", reservas);
 
     } catch (error) {
         console.error('Error getting reservas:', error);
@@ -112,7 +113,7 @@ async addUsuario(req, res) {
         const reserva = await model.getReservaPorIDFromDB(reservaID);
         if (reserva) {
             // res.status(200).json(reserva);
-            res.render("reservaUpdate", { reservas: reserva })
+            res.render("admin/reservaUpdate", { reserva })
         } else {
             res.status(404).send('Reserva not found');
         }
@@ -129,7 +130,7 @@ async addUsuario(req, res) {
         const updatedReserva = await model.editReservaFromDB(reservaID, updatedReservaData);
         if (updatedReserva) {
             // res.status(200).json(updatedReserva);
-            res.redirect("/admin" + "?mensaje=Reserva actualizado")
+            res.redirect("admin/admin" + "?mensaje=Reserva actualizado")
         } else {
             res.status(404).send('Reserva not found');
         }

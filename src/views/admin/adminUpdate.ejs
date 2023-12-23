@@ -10,20 +10,18 @@
 </header><br><br>
 
 <main class="container-fluid">
-    <div>
-        <h1>Registro de Usuario Nuevo</h1>
-       
-    </div>
-    
+        
     <div>
             <h1>Actualizar Usuario</h1>
            
         </div>
-            <form action="/usuarios/editar/<%= usuarios.id %>" method="POST">
-                <div class="elem-group"></div>
-                
+            <form action="/admin/usuarios/editar/<%= usuarios.id %>?_method=PUT" method="POST" nctype="application/x-www-form-urlencoded">
+               
+                <div class="elem-group">
+                    
                     <label for="nombre">Nombre y Apellido</label> 
                     <input type="text" id="nombre" name="nombre" value="<%= usuarios.nombre %>" pattern=[A-Z\sa-z]{3,20} > 
+                </div>
                 
     
                 <div class="elem-group">
@@ -71,7 +69,7 @@
                     
                     <div style="display: inline;">
                         <input type="submit" class="btn btn-outline-success" value="Actualizar">
-                        <a href="/" class="btn btn-warning">Cancel</a>
+                        <a href="/admin" class="btn btn-warning">Cancel</a>
                     </div>
             </form>
         </div> 

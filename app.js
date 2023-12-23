@@ -3,22 +3,24 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
-
+const methodOverride = require('method-override');
 const FullCalendar = require('fullcalendar');
 const dotenv = require('dotenv');
+const session = require('express-session');
 
 dotenv.config({
     path: './src/env/.env'
 });
-
-const session = require('express-session');
+//Session
 //const name = req.session.nombre || 'Debe iniciar sesión';
 app.use(session({
     secret: process.env.SESSION_SECRET,
+    name: "session",
+    cookie: { maxAge: 60000 * 10 },
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 * 10 },
 }));
+
 app.use(function (req, res, next) {  
 
     res.header("Access-Control-Allow-Origin", "*"); // permitir requests de cualquier origen
@@ -32,10 +34,9 @@ app.use(function (req, res, next) {
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static('node_modules'));
+app.use(methodOverride('_method'));
 
-//-seteamos el directorio de estaticos
-//app.use(express.static('public'));
-
+//motor de Vistas
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'src', 'views'));
 
@@ -64,7 +65,6 @@ const reservaRouter = require('./src/routes/reserva');
 const loginRouter = require('./src/routes/login');
 const contactoRouter = require('./src/routes/contacto');
 const authRouter = require('./src/routes/login');
-//const adminRouter = require('./src/routes/admin');
 const adminRoute = require('./src/routes/admin.routes');
 
 //const mainRouter = require('./src/routes/mainRouter');
@@ -79,13 +79,13 @@ app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/contacto', contactoRouter);
 app.use('/admin', adminRoute);
-app.use('/adminUpdate', adminRoute);
-app.use('/reservas', adminRoute);
-app.use('/usuarios', adminRoute);
-app.use("/usuarios/editar/:id", adminRoute);
-app.use("/reservas/editar/:id", adminRoute);
-app.use("/usuarios/borrar/:id", adminRoute);
-app.use("/reservas/borrar/:id", adminRoute);
+//app.use('/adminUpdate', adminRoute);
+//app.use('/reservas', adminRoute);
+//app.use('/usuarios', adminRoute);
+//app.use("/usuarios/editar/:id", adminRoute);
+//app.use("/reservas/editar/:id", adminRoute);
+//app.use("/usuarios/borrar/:id", adminRoute);
+//app.use("/reservas/borrar/:id", adminRoute);
 
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {

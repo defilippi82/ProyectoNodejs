@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs'); %>
+</head>
+<body class="container">
+
+<header>
+    
+</header><br><br>
+
+<main class="container-fluid">
+        
+    <div>
+            <h1>Actualizar Reserva</h1>
+           
+        </div>
+            <form action="/admin/reservas/editar/<%= usuarios.id %>?_method=PUT" method="POST" nctype="application/x-www-form-urlencoded">
+               
+                <div class="elem-group">
+                    
+                    <label for="id">ID</label> 
+                    <input type="text" id="nombre" name="nombre" value="<%= reserva.id %>" pattern=[A-Z\sa-z]{3,20} > 
+                </div>
+                
+    
+                <div class="elem-group">
+                        <label for="usuario">ID Usuario</label> 
+                        <input type="id_usuario" id="id_usuario" name="id_usuario" value="<%= reserva.id_usuario %>" > 
+                </div>
+    
+                <div>
+                    <label for="fecha">Manzana</label>
+                    <input type="fecha" id="fecha" name="fecha" value="<%= reserva.fecha%>">
+                    
+                 </div>
+                 <div>
+                  <label for="Hora">Hora Inicio</label>
+                  <input type="hora" id="hora_inicio" name="hora_inicio" value="<%= reserva.hora_inicio%>">
+                 </div>
+                 <div>
+                  <label for="estado">Estado</label>
+                  <input type="estado" id="estado" name="estado" value="<%= reserva.estado%>">
+                 </div>
+    
+                        
+                    <div style="display: inline;">
+                        <input type="submit" class="btn btn-outline-success" value="Actualizar">
+                        <a href="/admin" class="btn btn-warning">Cancel</a>
+                    </div>
+            </form>
+        </div> 
+       
+    </div> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <% if(typeof alert != "undefined"){ %>
+        <script>
+            Swal.fire({
+                title:'<%= alertTitle %>',
+                text:'<%= alertMessage %>',
+                icon:'<%= alertIcon %>',
+                showConfirmButton: <%=showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(()=>{
+                window.location = '/<%= ruta %>'
+            })
+            </script>
+    <% } %>
+            
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+
+</footer>
+
+</body>
+</html>
+
+      <tbody id="tabla">
+        <% if (typeof reservas !== 'undefined') { %>
+          <% reservas.forEach(reservations=> { %>
+            tr>
+            <td><%= reservations.id %></td>
+            <td><%= reservations.id_usuario %></td>
+            <td><%= reservations.fecha %></td>
+            <td><%= reservations.hora_inicio %></td>
+            <td><%= reservations.estado %></td>
+          
+                <td>
+                  <button class="btn btn-primary">Editar</button>
+                  <button class="btn btn-primary">Eliminar</button>  
+                </td>
+              </tr>
+            <% }) %>
+            <% } %>
+          </tbody>
+      
+    </table>
+    <div style="display: inline;">
+        <input type="submit" class="btn btn-outline-success" value="Actualizar">
+        <a href="/" class="btn btn-warning">Cancel</a>
+    </div>
