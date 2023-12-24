@@ -79,13 +79,13 @@ app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/contacto', contactoRouter);
 app.use('/admin', adminRoute);
-//app.use('/adminUpdate', adminRoute);
-//app.use('/reservas', adminRoute);
-//app.use('/usuarios', adminRoute);
-//app.use("/usuarios/editar/:id", adminRoute);
-//app.use("/reservas/editar/:id", adminRoute);
-//app.use("/usuarios/borrar/:id", adminRoute);
-//app.use("/reservas/borrar/:id", adminRoute);
+app.use('/adminUpdate', adminRoute);
+app.use('/reservas', adminRoute);
+app.use('/usuarios', adminRoute);
+app.use("/usuarios/editar/:id", adminRoute);
+app.use("admin/reservas/editar/:id", adminRoute);
+app.use("/usuarios/borrar/:id", adminRoute);
+app.use("admin/reservas/borrar/:id", adminRoute);
 
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {

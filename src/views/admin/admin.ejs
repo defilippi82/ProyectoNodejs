@@ -54,8 +54,8 @@
                 <td><%= usuarios.rol %></td>
               
                     <td>
-                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/<%= usuarios.id %>">editar</a>
-                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/borrar/<%= usuarios.id %>">borrar</a>
+                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/<%= usuarios.id %>" method="GET">editar</a>
+                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/borrar/<%= usuarios.id %>"  method="DELETE" >borrar</a>
                     </td>
                   </tr>
                 <% }); %>
@@ -98,8 +98,8 @@
                       <td><%= reservations.estado %></td>
                       
                           <td>
-                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/editar/<%= reservations.id %>">editar</a>
-                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/borrar/<%= reservations.id %>">borrar</a>
+                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/editar/<%= reservations.id %>" method="GET">editar</a>
+                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/borrar/<%= reservations.id %>"  method="DELETE">borrar</a>
                               
                           </td>
                         </tr>

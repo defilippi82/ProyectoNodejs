@@ -15,15 +15,26 @@ router.get("/", adminCtrl.adminViewGet);
 // USUARIOS
 // OBTENER todos los usuarios - OK
 router.get("/usuarios", adminCtrl.getAllUsuarios)
-//Redirect a register usuario VIEW
+//Redirect a register usuario VIEW - OK
 router.get("/usuarios/crear", adminCtrl.addUsuario)
 // Tomar usuario para ACTUALIZAR VIEW
-router.get("/usuarios/editar/:id", adminCtrl.editUsuario)
+
+router.put('/admin/usuarios/editar/:id', function(req, res) {
+
+  // obtener el usuario por id  
+  const usuario = obtenerUsuarioPorId(req.params.id); 
+
+  res.render('adminUpdate', {
+    usuario: usuario
+  });
+});
+
+//router.get("/admin/usuarios/editar/:id", adminCtrl.editUsuario)
 // Manejo de datos del form para editar usuario
-router.put("/usuarios/editar/:id", adminCtrl.editUsuarioPOST)
+router.put("/admin/usuarios/editar/:id", adminCtrl.editUsuarioPUT)
 
 // BORRAR usuario
-router.get("/usuarios/borrar/:id", adminCtrl.deleteUsuario)
+router.delete("/usuarios/borrar/:id", adminCtrl.deleteUsuario)
 
 //RESERVAS
 // OBTENER todos los Reservas 
@@ -36,7 +47,7 @@ router.put("/reservas/editar/:id", adminCtrl.editReservaPOST)
 
 
 // BORRAR Reserva
-router.get("/reservas/borrar/:id", adminCtrl.deleteReserva)
+router.delete("/reservas/borrar/:id", adminCtrl.deleteReserva)
 
 
 module.exports = router;

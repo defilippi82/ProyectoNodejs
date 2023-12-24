@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
-//const connection = require('../database/db');
 const conn = require('../database/conn');
+const {connectDB}= require('../database/db');
 
 
 const registerController ={
@@ -36,7 +36,7 @@ async registerPost(req, res) {
 
     let passwordHash = await bcryptjs.hash(password, 8);
 
-    connection.query('INSERT INTO usuarios SET ?', {
+    conn.query('INSERT INTO usuarios SET ?', {
         nombre: nombre,
         email: email,
         manzana: manzana,

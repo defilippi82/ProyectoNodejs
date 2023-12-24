@@ -1,5 +1,5 @@
-const {connectDB} = require('../database/db');
-
+const conn = require('../database/conn');
+const {connectDB}= require('../database/db');
 const model = {
     //USUARIOS
     

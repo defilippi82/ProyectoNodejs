@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const conn = require('../database/conn');
-const connection = require('../database/db');
+const {connectDB}= require('../database/db');
 
 module.exports.loginPost =(req, res) => {
 
@@ -8,7 +8,7 @@ module.exports.loginPost =(req, res) => {
     const pass = req.body.pass;
     //let passwordHash= await bcryptjs.hash(pass, 8);
     if (user && pass) {
-      connection.query('SELECT * FROM usuarios WHERE email =?', [user], async (error, results) => {
+      conn.query('SELECT * FROM usuarios WHERE email =?', [user], async (error, results) => {
         if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].contrasena))) {
           res.render('login', {
             alert: true,

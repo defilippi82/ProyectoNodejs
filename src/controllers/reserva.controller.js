@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
-const connection = require('../database/db');
+const conn = require('../database/conn');
+const {connectDB}= require('../database/db');
 
 const reservaController = {
 
@@ -81,7 +82,7 @@ const reservaController = {
                 // Verifica si la cancha está ocupada en el intervalo de tiempo de hora_inicio a hora_fin
                 const queryString = 'SELECT COUNT(*) AS count FROM reservas WHERE id_cancha = ? AND fecha = ? AND ((hora_inicio = ?) OR (hora_inicio < ? AND hora_fin > ?))';
 
-                connection.query(queryString, [cancha, fecha, hora_inicio, hora_fin, hora_inicio], (error, results) => {
+                conn.query(queryString, [cancha, fecha, hora_inicio, hora_fin, hora_inicio], (error, results) => {
                     if (error) {
                         return res.render('reserva', {
                             userId: userIdFromSession,
@@ -114,7 +115,7 @@ const reservaController = {
                     const hora_fin_59 = new Date(hora_inicio);
                     hora_fin_59.setMinutes(hora_inicio.getMinutes() + 59);
 
-                    connection.query(queryString2, [cancha, fecha, hora_inicio, hora_inicio, hora_inicio, hora_fin_59], (error, results) => {
+                    conn.query(queryString2, [cancha, fecha, hora_inicio, hora_inicio, hora_inicio, hora_fin_59], (error, results) => {
                         if (error) {
                             return res.render('reserva', {
                                 userId: userIdFromSession,
@@ -152,7 +153,7 @@ const reservaController = {
                             mensaje += ' Se cobrará la ficha de luz.';
                         }
 
-                        connection.query(insertString, [userIdFromSession, cancha, fecha, hora_inicio, hora_fin, estado], (error) => {
+                        conn.query(insertString, [userIdFromSession, cancha, fecha, hora_inicio, hora_fin, estado], (error) => {
                             if (error) {
                                 return res.render('reserva', {
                                     userId: userIdFromSession,
@@ -171,7 +172,7 @@ const reservaController = {
                             const segundaHoraFin = new Date(segundaHoraInicio);
                             segundaHoraFin.setMinutes(segundaHoraInicio.getMinutes() + 29);
 
-                            connection.query(insertString, [userIdFromSession, cancha, fecha, segundaHoraInicio, segundaHoraFin, estado], (error) => {
+                            conn.query(insertString, [userIdFromSession, cancha, fecha, segundaHoraInicio, segundaHoraFin, estado], (error) => {
                                 if (error) {
                                     return res.render('reserva', {
                                         userId: userIdFromSession,

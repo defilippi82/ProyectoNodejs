@@ -44,20 +44,21 @@ async addUsuario(req, res) {
 
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
+    res.redirect("admin/adminUpdate" + "?id=" + usuarioID);
+    /*
     try {
         const usuarios = await model.getUsuarioPorIDFromDB(usuarioID);
         if (usuario) {
-           
-            res.render("admin/adminUpdate", {usuarios})
+           res.render("admin/adminUpdate", {usuarios});
         } else {
             res.status(404).send('Usuario not found');
         }
     } catch (error) {
         console.error('Error getting usuario by ID:', error);
         res.status(500).send('Internal Server Error');
-    }
+    }*/
 },
- async editUsuarioPOST(req, res) {
+ async editUsuarioPUT(req, res) {
     const usuarioID = req.params.id;
     const updatedUsuarioData = req.body;
     try {
