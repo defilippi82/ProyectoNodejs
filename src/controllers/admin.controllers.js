@@ -44,7 +44,8 @@ async addUsuario(req, res) {
 
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
-    res.redirect("admin/adminUpdate" + "?id=" + usuarioID);
+    console.log("usuarioID", usuarioID);
+    res.redirect("/adminUpdate?id=" + usuarioID);
     /*
     try {
         const usuarios = await model.getUsuarioPorIDFromDB(usuarioID);
@@ -60,12 +61,13 @@ async addUsuario(req, res) {
 },
  async editUsuarioPUT(req, res) {
     const usuarioID = req.params.id;
+    console.log("usuarioIDPUT", usuarioID);
     const updatedUsuarioData = req.body;
     try {
         const updatedUsuario = await model.editUsuarioFromDB(usuarioID, updatedUsuarioData);
         if (updatedUsuario) {
            
-            res.redirect("/admin" + "?mensaje=Usuario actualizado")
+            res.redirect("/admin?mensaje=Usuario actualizado")
         } else {
             res.status(404).send('Usuario not found');
         }
@@ -78,11 +80,12 @@ async addUsuario(req, res) {
 
  async  deleteUsuario(req, res) {
     const usuarioID = req.params.id;
+    console.log("usuarioIDDELETE", usuarioID);
     try {
         const deletedUsuario = await model.deleteUsuarioFromDB(usuarioID);
         if (deletedUsuario) {
             // res.status(200).json(deletedUsuario);
-            res.render("/admin?mensaje=Usuario eliminado"   )
+            res.redirect("/admin?mensaje=Usuario eliminado"   )
         } else {
             res.status(404).send('usuario not found');
         }

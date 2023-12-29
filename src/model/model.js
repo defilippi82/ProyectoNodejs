@@ -21,8 +21,8 @@ const model = {
         try {
             const connection = await connectDB();
             const [datos] = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [id]);
-            console.log('datos de los usuariosID de getUsuarioPorIDFromDB', datos);
-            return datos;
+            //console.log('datos de los usuariosID de getUsuarioPorIDFromDB', datos[0]);
+            return datos[0];
         } catch (error) {
             console.error('Error querying MySQL:', error);
             throw error;
@@ -32,6 +32,7 @@ const model = {
       
     // Editar un usuario por ID en la base de datos
     editUsuarioFromDB : async (id, updatedUsuarioData) => {
+        console.log('idfromDB', id);
         try {
             const connection = await connectDB();
             await connection.execute('UPDATE usuarios SET ? WHERE id = ?', [updatedUsuarioData, id]);
@@ -61,7 +62,7 @@ const model = {
     try {
         const connection = await connectDB();
         const [rows, fields] = await connection.execute('SELECT * FROM reservas');
-        console.log('datos de los usuarios de getAllreservasFromDB', rows);
+        //console.log('datos de los usuarios de getAllreservasFromDB', rows);
             return rows;
     } catch (error) {
         console.error('Error querying MySQL:', error);

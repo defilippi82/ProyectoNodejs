@@ -19,7 +19,7 @@ router.get("/usuarios", adminCtrl.getAllUsuarios)
 router.get("/usuarios/crear", adminCtrl.addUsuario)
 // Tomar usuario para ACTUALIZAR VIEW
 
-router.put('/admin/usuarios/editar/:id', function(req, res) {
+/*router.put('/usuarios/editar/:id', function(req, res) {
 
   // obtener el usuario por id  
   const usuario = obtenerUsuarioPorId(req.params.id); 
@@ -27,21 +27,21 @@ router.put('/admin/usuarios/editar/:id', function(req, res) {
   res.render('adminUpdate', {
     usuario: usuario
   });
-});
+});*/
 
 //router.get("/admin/usuarios/editar/:id", adminCtrl.editUsuario)
 // Manejo de datos del form para editar usuario
-router.put("/admin/usuarios/editar/:id", adminCtrl.editUsuarioPUT)
+router.put("/usuarios/editar/:id", adminCtrl.editUsuarioPUT);
 
 // BORRAR usuario
-router.delete("/usuarios/borrar/:id", adminCtrl.deleteUsuario)
+router.delete("/usuarios/borrar/:id", adminCtrl.deleteUsuario);
 
 //RESERVAS
 // OBTENER todos los Reservas 
 router.get("/reservas", adminCtrl.getAllReservas)
 
 // Tomar Reserva para VER LAS RESERVAS POR ID VIEW
-router.get("/reservas/editar/:id", adminCtrl.editReserva)
+//router.get("/reservas/editar/:id", adminCtrl.editReserva)
 // Manejo de datos del form EDITAR LAS RESERVAS POR ID
 router.put("/reservas/editar/:id", adminCtrl.editReservaPOST)
 

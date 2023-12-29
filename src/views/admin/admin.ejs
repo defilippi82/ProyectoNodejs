@@ -54,7 +54,18 @@
                 <td><%= usuarios.rol %></td>
               
                     <td>
-                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/<%= usuarios.id %>" method="GET">editar</a>
+                      <form action="/usuarios/editar/<%= usuarios.id %>" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <!-- Otros campos del formulario si es necesario -->
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </form>
+                    
+                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/<%= usuarios.id %>" method="PUT">editar</a>
+                      <form action="/usuarios/borrar/<%= usuarios.id %>" method="POST" onsubmit="return confirm('¿Estás seguro de borrar este usuario?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+                    
                       <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/borrar/<%= usuarios.id %>"  method="DELETE" >borrar</a>
                     </td>
                   </tr>
@@ -98,7 +109,7 @@
                       <td><%= reservations.estado %></td>
                       
                           <td>
-                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/editar/<%= reservations.id %>" method="GET">editar</a>
+                            <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/editar/<%= reservations.id %>" method="PUT">editar</a>
                             <a id="reserva" type="button" class="btn btn-primary"  href="/reservas/borrar/<%= reservations.id %>"  method="DELETE">borrar</a>
                               
                           </td>

@@ -56,7 +56,7 @@ const bcryptjs = require("bcryptjs");
 const conn = require('./src/database/conn');
 
 //9 - establecemos las rutas
-console.log(__dirname);
+//console.log(__dirname);
 
 const indexRouter = require('./src/routes/index');
 const registerRouter = require('./src/routes/register.routes');
@@ -83,9 +83,9 @@ app.use('/adminUpdate', adminRoute);
 app.use('/reservas', adminRoute);
 app.use('/usuarios', adminRoute);
 app.use("/usuarios/editar/:id", adminRoute);
-app.use("admin/reservas/editar/:id", adminRoute);
+app.use("/reservas/editar/:id", adminRoute);
 app.use("/usuarios/borrar/:id", adminRoute);
-app.use("admin/reservas/borrar/:id", adminRoute);
+app.use("/reservas/borrar/:id", adminRoute);
 
 //función para limpiar la caché luego del logout
 app.use(function (req, res, next) {
@@ -94,6 +94,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/', (req, res) => {
+    const login = req.session.loggedin || false;
+    const name =req.session.nombre || 'Debe iniciar sesión';
+    res.render('index', {
+        login,
+        name
+    });
+});
 //Logout
 //Destruye la sesión.
 app.get('/logout', (req, res) => {
@@ -129,14 +137,6 @@ function logueado(req, res) {
         });
     }
 };
-app.get('/', (req, res) => {
-    const login = req.session.loggedin || false;
-    const name =req.session.nombre || 'Debe iniciar sesión';
-    res.render('index', {
-        login,
-        name
-    });
-});
 app.get('/', (req, res) => {
     logueado(req, res); // Llamada a la función logueado dentro de la ruta '/'
 });
