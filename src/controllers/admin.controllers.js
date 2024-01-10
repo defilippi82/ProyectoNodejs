@@ -45,7 +45,8 @@ async addUsuario(req, res) {
  async  editUsuario(req, res) {
     const usuarioID = req.params.id;
     console.log("usuarioID", usuarioID);
-    res.redirect("/adminUpdate?id=" + usuarioID);
+    res.redirect("/admin/usuarios/editar/" + usuarioID);
+    //res.redirect("/adminUpdate?id=" + usuarioID);
     /*
     try {
         const usuarios = await model.getUsuarioPorIDFromDB(usuarioID);

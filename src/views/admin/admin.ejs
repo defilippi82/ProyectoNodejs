@@ -60,13 +60,13 @@
                         <button type="submit" class="btn btn-primary">Editar</button>
                     </form>
                     
-                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/editar/<%= usuarios.id %>" method="PUT">editar</a>
+                      
                       <form action="/usuarios/borrar/<%= usuarios.id %>" method="POST" onsubmit="return confirm('¿Estás seguro de borrar este usuario?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
                     
-                      <a id="usuarios" type="button" class="btn btn-primary"  href="/usuarios/borrar/<%= usuarios.id %>"  method="DELETE" >borrar</a>
+                      
                     </td>
                   </tr>
                 <% }); %>
