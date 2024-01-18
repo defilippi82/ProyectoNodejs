@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+body,footer,main, header, nav ,.navbar,.offcanvas-body,.dropdown-menu,.card{
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
+      font-style: bold;
+    
+    text-align: center;
+    font-size: 1em;
+  }
+  .container{
+    width: 90%;
+  }
+  main{
+    padding-top: 1.5rem;
+  }
+  .btn{
+    padding: 0.5rem 2rem;
+    transition: all;
+    transition-duration: 500ms;
+  }
+  .btn:hover{
+    scale: 1.25;
+  }
+  .card-img-top{
+    transition: all;
+    transition-duration: 500ms;
+  }
+  .card-img-top:hover{
+    scale: 1.20;
+  }

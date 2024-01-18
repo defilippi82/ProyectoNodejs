@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('partials/header'); %>
+</header>
+
+<main class="container-fluid">
+    <a href="https://api.whatsapp.com/send?phone=+5491154939423&text=hola%20hebert" target="_blank"></a>
+        <main>
+            <form action="/contacto/send" method="POST">
+				<br>
+				<label for="nombreapellido">Nombre y Apellido</label><br>
+				<input type="text" id="nombre" name="nombre" class="input-padron" required><br>
+
+				<label for="nombreapellido">Lote</label><br>
+				<input type="text" id="lote" name="lote" class="input-padron" required placeholder="ej. 5-10"><br>
+
+				<label  for="mensaje">Mensaje</label><br>
+				<textarea cols="auto" rows="5" id="consulta" name="consulta" class="input-padron" required></textarea>
+				<fieldset>
+					<legend> ¿A quien le gustaría que lo enviemos?</legend>
+					<select class="form-select" aria-label="Default select example">
+                        <option name="contacto" value="administracion" id="radio-administracion">Administración</option>
+                        <option name="contacto" value="facturacion" id="radio-facturacion">Facturación</option>
+                        <option name="contacto" value="controlDeObras" id="radio-controlDeObras">Control de Obras</option>
+                    </select>
+					
+				</fieldset>	<br>
+				<input type="checkbox" id="whatsapp" name="whatsapp">
+				<label for="correo">Contactar por Whatsapp</label><br>
+				<input type="checkbox" id="correo" name="correo">
+				<label for="correo">Consultar por correo electrónico</label><br>
+
+				
+				<input type="submit" value="Enviar consulta" id="enviarConsulta" class="btn btn-primary" >
+
+			</form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+		<script src="resources/js/botonpanico.js"></script>
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+	
+    
+</body>
+</html>
