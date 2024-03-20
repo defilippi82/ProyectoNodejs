@@ -1,7 +1,7 @@
 // 1 - Invocamos a Express
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const path = require('path');
 const methodOverride = require('method-override');
 const FullCalendar = require('fullcalendar');
@@ -141,4 +141,4 @@ app.get('/', (req, res) => {
     logueado(req, res); // Llamada a la función logueado dentro de la ruta '/'
 });
 
-app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port} http://localhost:3000/`));
+app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port} http://localhost:${port}/`));
