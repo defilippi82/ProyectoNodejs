@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 
 dotenv.config({
-    path: './src/env/.env'
+    path: './public/env/.env'
 });
 //Session
 //const name = req.session.nombre || 'Debe iniciar sesión';
@@ -38,7 +38,7 @@ app.use(methodOverride('_method'));
 
 //motor de Vistas
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'src', 'views'));
+app.set('views', path.join(__dirname, 'public', 'views'));
 
 app.use((req, res, next) => {
     res.locals.login = req.session.loggedin || false;
@@ -53,19 +53,19 @@ const bcryptjs = require("bcryptjs");
 
 // 8 - Invocamos a la conexion de la DB
 //const connection = require('./src/database/db');
-const conn = require('./src/database/conn');
+const conn = require('./public/database/conn');
 
 //9 - establecemos las rutas
 //console.log(__dirname);
 
-const indexRouter = require('./src/routes/index');
-const registerRouter = require('./src/routes/register.routes');
-const invitadosRouter = require('./src/routes/invitados');
-const reservaRouter = require('./src/routes/reserva');
-const loginRouter = require('./src/routes/login');
-const contactoRouter = require('./src/routes/contacto');
-const authRouter = require('./src/routes/login');
-const adminRoute = require('./src/routes/admin.routes');
+const indexRouter = require('./public/routes/index');
+const registerRouter = require('./public/routes/register.routes');
+const invitadosRouter = require('./public/routes/invitados');
+const reservaRouter = require('./public/routes/reserva');
+const loginRouter = require('./public/routes/login');
+const contactoRouter = require('./public/routes/contacto');
+const authRouter = require('./public/routes/login');
+const adminRoute = require('./public/routes/admin.routes');
 
 //const mainRouter = require('./src/routes/mainRouter');
 
