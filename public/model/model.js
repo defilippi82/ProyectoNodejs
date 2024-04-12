@@ -1,4 +1,105 @@
 const conn = require('../database/conn');
+const { connectDB } = require('../database/db');
+
+const model = {
+    //USUARIOS
+
+    getAllUsuariosFromDB: async () => {
+        try {
+            const connection = await connectDB();
+            const [rows] = await connection.execute('SELECT * FROM usuarios');
+            return rows;
+        } catch (error) {
+            console.error('Error al obtener usuarios desde la base de datos:', error);
+            throw error;
+        }
+    },
+
+    getUsuarioPorIDFromDB: async (id) => {
+        try {
+            const connection = await connectDB();
+            const [rows] = await connection.execute('SELECT * FROM usuarios WHERE id = ?', [id]);
+            return rows[0];
+        } catch (error) {
+            console.error('Error al obtener usuario por ID desde la base de datos:', error);
+            throw error;
+        }
+    },
+
+    editUsuarioFromDB: async (id, updatedUsuarioData) => {
+        try {
+            const connection = await connectDB();
+            await connection.execute('UPDATE usuarios SET ? WHERE id = ?', [updatedUsuarioData, id]);
+            const updatedUsuario = await model.getUsuarioPorIDFromDB(id);
+            return updatedUsuario;
+        } catch (error) {
+            console.error('Error al actualizar usuario en la base de datos:', error);
+            throw error;
+        }
+    },
+
+    deleteUsuarioFromDB: async (id) => {
+        try {
+            const connection = await connectDB();
+            const deletedUsuario = await model.getUsuarioPorIDFromDB(id);
+            await connection.execute('DELETE FROM usuarios WHERE id = ?', [id]);
+            return deletedUsuario;
+        } catch (error) {
+            console.error('Error al eliminar usuario de la base de datos:', error);
+            throw error;
+        }
+    },
+
+    //RESERVAS
+    getAllReservasFromDB: async () => {
+        try {
+            const connection = await connectDB();
+            const [rows] = await connection.execute('SELECT * FROM reservas');
+            return rows;
+        } catch (error) {
+            console.error('Error al obtener reservas desde la base de datos:', error);
+            throw error;
+        }
+    },
+
+    getReservaPorIDFromDB: async (id) => {
+        try {
+            const connection = await connectDB();
+            const [rows] = await connection.execute('SELECT * FROM reservas WHERE id = ?', [id]);
+            return rows[0];
+        } catch (error) {
+            console.error('Error al obtener reserva por ID desde la base de datos:', error);
+            throw error;
+        }
+    },
+
+    editReservaFromDB: async (id, updatedReservaData) => {
+        try {
+            const connection = await connectDB();
+            await connection.execute('UPDATE reservas SET ? WHERE id = ?', [updatedReservaData, id]);
+            const updatedReserva = await model.getReservaPorIDFromDB(id);
+            return updatedReserva;
+        } catch (error) {
+            console.error('Error al actualizar reserva en la base de datos:', error);
+            throw error;
+        }
+    },
+
+    deleteReservaFromDB: async (id) => {
+        try {
+            const connection = await connectDB();
+            const deletedReserva = await model.getReservaPorIDFromDB(id);
+            await connection.execute('DELETE FROM reservas WHERE id = ?', [id]);
+            return deletedReserva;
+        } catch (error) {
+            console.error('Error al eliminar reserva de la base de datos:', error);
+            throw error;
+        }
+    }
+};
+
+module.exports = { model };
+/*const conn = require('../database/conn');
 const {connectDB}= require('../database/db');
 const model = {
     //USUARIOS
@@ -109,4 +210,4 @@ editReservaFromDB : async (id, updatedReservaData) => {
 }
 
 };
-module.exports = { model};
+module.exports = { model};*/

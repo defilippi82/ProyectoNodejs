@@ -41,8 +41,8 @@
           </tr>  
           <tbody >
             
-            <% if (Array.isArray(data) && data.length > 0) { %>
-              <% data.forEach(usuarios=> { %>
+            <% if (Array.isArray(users) && users.length > 0) { %>
+              <% users.forEach(usuarios=> { %>
                 <tr>
                 <td style="display: none"><%= usuarios.id %></td>
                 <td><%= usuarios.nombre %></td>
@@ -99,8 +99,8 @@
                       
               
                 <tbody >
-                  <% if (Array.isArray(reservas) && reservas.length > 0) { %>
-                    <% reservas.forEach(reservations=> { %>
+                  <% if (Array.isArray(reservations) && reservations.length > 0) { %>
+                    <% reservations.forEach(reservations=> { %>
                       <tr>
                       <td><%= reservations.id %></td>
                       <td><%= reservations.id_usuario %></td>
