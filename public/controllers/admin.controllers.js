@@ -5,7 +5,9 @@ const adminController = {
   adminViewGet: async (req, res) => {
     try {
       const usuarios = await adminService.getAllUsuarios(req, res);
+      console.log("usuarios", usuarios);
       const reservas = await adminService.getAllReservas(req, res);
+      console.log("Reservas", reservas);
       res.render('admin/admin', { users: usuarios, reservations: reservas });
     } catch (error) {
       console.error('Error getting data:', error);
