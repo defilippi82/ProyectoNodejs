@@ -126,7 +126,7 @@ function invitadosPost() {
 
 
 function invitar() {
-    var urlInvitacion = "public/pages/invitacion.html"; //pagina de la invitacion
+    var urlInvitacion = "/public/pages/invitacion.html"; //pagina de la invitacion
     var msj = "Te envío la invitación para autorizar el ingreso " + urlInvitacion;
     var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msj);
 
